@@ -1,0 +1,32 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+build/
+publish/
+artifacts/
+
+# Visual Studio and .NET
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+TestResults/
+coverage*/
+*.nupkg
+*.snupkg
+
+# Rider / IntelliJ
+.idea/
+*.sln.iml
+
+# NuGet
+packages/
+*.nuget.props
+*.nuget.targets
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
