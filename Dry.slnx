@@ -1,2 +1,8 @@
-<Solution />
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Olivercode.Dry.Auth.Provider.Supabase/Olivercode.Dry.Auth.Provider.Supabase.csproj" />
+    <Project Path="src/Olivercode.Dry.Auth.Provider/Olivercode.Dry.Auth.Provider.csproj" />
+    <Project Path="src/Olivercode.Dry.Auth.Session.Wpf/Olivercode.Dry.Auth.Session.Wpf.csproj" />
+  </Folder>
+</Solution>
 
