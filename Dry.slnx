@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Olivercode.Dry.System/Olivercode.Dry.System.csproj" />
+    <Project Path="src/Olivercode.Dry.UI.Behaviors.WPF/Olivercode.Dry.UI.Behaviors.WPF.csproj" />
     <Project Path="src/Olivercode.Media.Subs/Olivercode.Media.Subs.csproj" />
     <Project Path="src/Olivercode.Dry.Auth.Provider.Supabase/Olivercode.Dry.Auth.Provider.Supabase.csproj" />
     <Project Path="src/Olivercode.Dry.Auth.Provider/Olivercode.Dry.Auth.Provider.csproj" />
