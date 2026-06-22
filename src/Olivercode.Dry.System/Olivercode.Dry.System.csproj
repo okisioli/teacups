@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>Olivercode.Dry.System</PackageId>
+    <Description>Reusable system and process helpers for .NET applications.</Description>
+  </PropertyGroup>
+</Project>
