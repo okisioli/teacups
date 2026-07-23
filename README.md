@@ -1,4 +1,4 @@
-# Dry
+# Teacups
 
 Reusable .NET libraries published as NuGet packages through GitHub Packages.
 

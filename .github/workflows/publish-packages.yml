@@ -24,10 +24,10 @@ jobs:
           dotnet-version: 9.0.x
 
       - name: Restore
-        run: dotnet restore Dry.slnx
+        run: dotnet restore Teacups.slnx
 
       - name: Pack
-        run: dotnet pack Dry.slnx --configuration Release --no-restore
+        run: dotnet pack Teacups.slnx --configuration Release --no-restore
 
       - name: Publish to GitHub Packages
         shell: bash
