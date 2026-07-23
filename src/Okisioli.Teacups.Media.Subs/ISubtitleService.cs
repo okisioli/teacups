@@ -1,4 +1,4 @@
-namespace Teacups.Media.Subs;
+namespace Okisioli.Teacups.Media.Subs;
 
 public interface ISubtitleService : IDisposable
 {
