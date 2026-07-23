@@ -3,7 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>Olivercode.Media.Subs</PackageId>
+    <PackageId>Teacups.Media.Subs</PackageId>
     <Description>Framework-independent subtitle loading and playback for .NET applications.</Description>
   </PropertyGroup>
 </Project>

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
 
-namespace Olivercode.Media.Subs;
+namespace Teacups.Media.Subs;
 
 public sealed class SubtitleService : ISubtitleService
 {
