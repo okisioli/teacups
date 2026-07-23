@@ -1,8 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <PackageId>Okisioli.Teacups.Auth.Provider.Supabase</PackageId>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.Provider.</Description>
   </PropertyGroup>
