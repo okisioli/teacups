@@ -5,6 +5,7 @@
     <Version>0.1.0</Version>
     <Description>Windows DPAPI session storage for Okisioli.Teacups.Auth.Provider.</Description>
     <PackageReleaseNotes />
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Security.Cryptography.ProtectedData" />
