@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <PackageId>Okisioli.Teacups.Auth.Session.Wpf</PackageId>
+    <Version>0.1.0</Version>
     <Description>Windows DPAPI session storage for Okisioli.Teacups.Auth.Provider.</Description>
+    <PackageReleaseNotes />
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Security.Cryptography.ProtectedData" />

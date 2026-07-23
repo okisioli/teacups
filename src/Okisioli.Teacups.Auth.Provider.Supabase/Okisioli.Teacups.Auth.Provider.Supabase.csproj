@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <PackageId>Okisioli.Teacups.Auth.Provider.Supabase</PackageId>
+    <Version>0.1.0</Version>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.Provider.</Description>
+    <PackageReleaseNotes />
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />

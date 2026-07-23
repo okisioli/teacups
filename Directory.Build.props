@@ -2,8 +2,13 @@
   <PropertyGroup>
     <ArtifactsPath>$(MSBuildThisFileDirectory)build</ArtifactsPath>
     <PackageOutputPath>$(MSBuildThisFileDirectory)publish</PackageOutputPath>
-    <Version>1.0.0</Version>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <RepositoryUrl>https://github.com/oli-g-sk/teacups</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageProjectUrl>https://github.com/oli-g-sk/teacups</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>
