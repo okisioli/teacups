@@ -1,0 +1,43 @@
+name: Publish to GitHub Packages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore
+        run: dotnet restore Teacups.slnx
+
+      - name: Pack
+        run: dotnet pack Teacups.slnx --configuration Release --no-restore
+
+      - name: Publish to GitHub Packages
+        shell: bash
+        run: |
+          shopt -s nullglob
+          packages=(publish/*.nupkg)
+          if (( ${#packages[@]} == 0 )); then
+            echo "No packages were produced."
+            exit 1
+          fi
+          for package in "${packages[@]}"; do
+            dotnet nuget push "$package" \
+              --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+              --api-key "${{ secrets.GITHUB_TOKEN }}" \
+              --skip-duplicate
+          done
