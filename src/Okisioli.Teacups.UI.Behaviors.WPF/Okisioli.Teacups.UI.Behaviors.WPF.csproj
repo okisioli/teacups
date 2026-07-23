@@ -4,7 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <PackageId>Olivercode.Dry.UI.Behaviors.WPF</PackageId>
+    <PackageId>Okisioli.Teacups.UI.Behaviors.WPF</PackageId>
     <Description>Reusable WPF and XAML behaviors for .NET desktop applications.</Description>
   </PropertyGroup>
 </Project>

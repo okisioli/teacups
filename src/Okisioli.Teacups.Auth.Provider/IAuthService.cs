@@ -1,4 +1,4 @@
-namespace Olivercode.Dry.Auth.Provider;
+namespace Okisioli.Teacups.Auth.Provider;
 
 public interface IAuthService
 {

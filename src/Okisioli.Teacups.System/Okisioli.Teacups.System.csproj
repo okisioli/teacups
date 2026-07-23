@@ -3,7 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>Olivercode.Dry.Auth.Provider</PackageId>
-    <Description>Provider-neutral authentication contracts for .NET applications.</Description>
+    <PackageId>Okisioli.Teacups.System</PackageId>
+    <Description>Reusable system and process helpers for .NET applications.</Description>
   </PropertyGroup>
 </Project>

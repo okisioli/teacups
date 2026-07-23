@@ -1,11 +1,11 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/Olivercode.Dry.System/Olivercode.Dry.System.csproj" />
-    <Project Path="src/Olivercode.Dry.UI.Behaviors.WPF/Olivercode.Dry.UI.Behaviors.WPF.csproj" />
+    <Project Path="src/Okisioli.Teacups.System/Okisioli.Teacups.System.csproj" />
+    <Project Path="src/Okisioli.Teacups.UI.Behaviors.WPF/Okisioli.Teacups.UI.Behaviors.WPF.csproj" />
     <Project Path="src/Olivercode.Media.Subs/Olivercode.Media.Subs.csproj" />
-    <Project Path="src/Olivercode.Dry.Auth.Provider.Supabase/Olivercode.Dry.Auth.Provider.Supabase.csproj" />
-    <Project Path="src/Olivercode.Dry.Auth.Provider/Olivercode.Dry.Auth.Provider.csproj" />
-    <Project Path="src/Olivercode.Dry.Auth.Session.Wpf/Olivercode.Dry.Auth.Session.Wpf.csproj" />
+    <Project Path="src/Okisioli.Teacups.Auth.Provider.Supabase/Okisioli.Teacups.Auth.Provider.Supabase.csproj" />
+    <Project Path="src/Okisioli.Teacups.Auth.Provider/Okisioli.Teacups.Auth.Provider.csproj" />
+    <Project Path="src/Okisioli.Teacups.Auth.Session.Wpf/Okisioli.Teacups.Auth.Session.Wpf.csproj" />
   </Folder>
 </Solution>
 

@@ -1,4 +1,4 @@
-namespace Olivercode.Dry.Auth.Provider;
+namespace Okisioli.Teacups.Auth.Provider;
 
 public sealed record AuthResult(bool IsSuccess, string? ErrorMessage = null)
 {

@@ -3,11 +3,11 @@
     <TargetFramework>net9.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>Olivercode.Dry.Auth.Session.Wpf</PackageId>
-    <Description>Windows DPAPI session storage for Olivercode.Dry.Auth.Provider.</Description>
+    <PackageId>Okisioli.Teacups.Auth.Session.Wpf</PackageId>
+    <Description>Windows DPAPI session storage for Okisioli.Teacups.Auth.Provider.</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Security.Cryptography.ProtectedData" />
-    <ProjectReference Include="..\Olivercode.Dry.Auth.Provider\Olivercode.Dry.Auth.Provider.csproj" />
+    <ProjectReference Include="..\Okisioli.Teacups.Auth.Provider\Okisioli.Teacups.Auth.Provider.csproj" />
   </ItemGroup>
 </Project>

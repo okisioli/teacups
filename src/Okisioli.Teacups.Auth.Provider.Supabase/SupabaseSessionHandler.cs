@@ -1,9 +1,9 @@
 using Newtonsoft.Json;
-using Olivercode.Dry.Auth.Provider;
+using Okisioli.Teacups.Auth.Provider;
 using Supabase.Gotrue;
 using Supabase.Gotrue.Interfaces;
 
-namespace Olivercode.Dry.Auth.Provider.Supabase;
+namespace Okisioli.Teacups.Auth.Provider.Supabase;
 
 internal sealed class SupabaseSessionHandler(IAuthSessionStore store) : IGotrueSessionPersistence<Session>
 {

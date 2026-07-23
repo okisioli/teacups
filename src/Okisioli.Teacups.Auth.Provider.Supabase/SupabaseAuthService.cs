@@ -1,6 +1,6 @@
-using Olivercode.Dry.Auth.Provider;
+using Okisioli.Teacups.Auth.Provider;
 
-namespace Olivercode.Dry.Auth.Provider.Supabase;
+namespace Okisioli.Teacups.Auth.Provider.Supabase;
 
 public sealed class SupabaseAuthService(
     SupabaseClientProvider clientProvider,

@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Olivercode.Dry.System;
+namespace Okisioli.Teacups.System;
 
 public static class ProcessHelper
 {

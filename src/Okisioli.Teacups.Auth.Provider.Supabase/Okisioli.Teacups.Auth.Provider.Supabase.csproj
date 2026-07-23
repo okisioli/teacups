@@ -3,13 +3,13 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>Olivercode.Dry.Auth.Provider.Supabase</PackageId>
-    <Description>Supabase authentication implementation for Olivercode.Dry.Auth.Provider.</Description>
+    <PackageId>Okisioli.Teacups.Auth.Provider.Supabase</PackageId>
+    <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.Provider.</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Supabase" />
-    <ProjectReference Include="..\Olivercode.Dry.Auth.Provider\Olivercode.Dry.Auth.Provider.csproj" />
+    <ProjectReference Include="..\Okisioli.Teacups.Auth.Provider\Okisioli.Teacups.Auth.Provider.csproj" />
   </ItemGroup>
 </Project>

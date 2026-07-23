@@ -1,9 +1,9 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Olivercode.Dry.Auth.Provider;
+using Okisioli.Teacups.Auth.Provider;
 
-namespace Olivercode.Dry.Auth.Session.Wpf;
+namespace Okisioli.Teacups.Auth.Session.Wpf;
 
 public sealed class WpfAuthSessionStore : IAuthSessionStore
 {
