@@ -6,5 +6,6 @@
     <UseWPF>true</UseWPF>
     <PackageId>Okisioli.Teacups.UI.Behaviors.WPF</PackageId>
     <Description>Reusable WPF and XAML behaviors for .NET desktop applications.</Description>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 </Project>
