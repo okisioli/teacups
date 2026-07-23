@@ -2,7 +2,9 @@
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
     <PackageId>Okisioli.Teacups.Auth.Session.Wpf</PackageId>
+    <Version>0.1.0</Version>
     <Description>Windows DPAPI session storage for Okisioli.Teacups.Auth.Provider.</Description>
+    <PackageReleaseNotes />
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Security.Cryptography.ProtectedData" />
