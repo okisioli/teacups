@@ -21,10 +21,10 @@ jobs:
           dotnet-version: 9.0.x
 
       - name: Restore
-        run: dotnet restore Teacups.slnx
+        run: dotnet restore Okisioli.Teacups.slnx
 
       - name: Pack
-        run: dotnet pack Teacups.slnx --configuration Release --no-restore
+        run: dotnet pack Okisioli.Teacups.slnx --configuration Release --no-restore
 
       - name: Publish to GitHub Packages
         shell: bash
