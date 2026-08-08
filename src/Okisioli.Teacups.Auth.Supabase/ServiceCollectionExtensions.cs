@@ -1,7 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using Okisioli.Teacups.Auth.Provider;
+using Okisioli.Teacups.Auth;
+using Okisioli.Teacups.System;
 
-namespace Okisioli.Teacups.Auth.Provider.Supabase;
+namespace Okisioli.Teacups.Auth.Supabase;
 
 public static class ServiceCollectionExtensions
 {
@@ -9,7 +10,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         string url,
         string key,
-        IAuthSessionStore? sessionStore = null,
+        IProtectedStringStore? sessionStore = null,
         string? passwordResetRedirectUrl = null)
     {
         ArgumentNullException.ThrowIfNull(services);

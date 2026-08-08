@@ -1,11 +1,11 @@
 using Newtonsoft.Json;
-using Okisioli.Teacups.Auth.Provider;
+using Okisioli.Teacups.System;
 using Supabase.Gotrue;
 using Supabase.Gotrue.Interfaces;
 
-namespace Okisioli.Teacups.Auth.Provider.Supabase;
+namespace Okisioli.Teacups.Auth.Supabase;
 
-internal sealed class SupabaseSessionHandler(IAuthSessionStore store) : IGotrueSessionPersistence<Session>
+internal sealed class SupabaseSessionHandler(IProtectedStringStore store) : IGotrueSessionPersistence<Session>
 {
     private bool _persistenceEnabled = true;
 

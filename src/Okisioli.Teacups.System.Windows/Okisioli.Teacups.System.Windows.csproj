@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
-    <PackageId>Okisioli.Teacups.Auth.Session.Wpf</PackageId>
+    <PackageId>Okisioli.Teacups.System.Windows</PackageId>
     <Version>0.2.0</Version>
-    <Description>Windows DPAPI session storage for Okisioli.Teacups.Auth.Provider.</Description>
+    <Description>Windows DPAPI-backed protected string storage for .NET applications.</Description>
     <PackageReleaseNotes />
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Security.Cryptography.ProtectedData" />
-    <ProjectReference Include="..\Okisioli.Teacups.Auth.Provider\Okisioli.Teacups.Auth.Provider.csproj" />
+    <ProjectReference Include="..\Okisioli.Teacups.System\Okisioli.Teacups.System.csproj" />
   </ItemGroup>
 </Project>

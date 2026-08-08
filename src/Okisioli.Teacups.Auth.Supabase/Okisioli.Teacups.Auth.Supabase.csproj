@@ -1,14 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>Okisioli.Teacups.Auth.Provider.Supabase</PackageId>
+    <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
     <Version>0.2.0</Version>
-    <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.Provider.</Description>
+    <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
     <PackageReleaseNotes />
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Supabase" />
-    <ProjectReference Include="..\Okisioli.Teacups.Auth.Provider\Okisioli.Teacups.Auth.Provider.csproj" />
+    <ProjectReference Include="..\Okisioli.Teacups.Auth\Okisioli.Teacups.Auth.csproj" />
+    <ProjectReference Include="..\Okisioli.Teacups.System\Okisioli.Teacups.System.csproj" />
   </ItemGroup>
 </Project>

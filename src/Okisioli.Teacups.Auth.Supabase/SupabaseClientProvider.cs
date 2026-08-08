@@ -1,13 +1,13 @@
-using Okisioli.Teacups.Auth.Provider;
+using Okisioli.Teacups.System;
 
-namespace Okisioli.Teacups.Auth.Provider.Supabase;
+namespace Okisioli.Teacups.Auth.Supabase;
 
 public sealed class SupabaseClientProvider
 {
     private readonly SupabaseSessionHandler? _sessionHandler;
     private Task? _initialization;
 
-    public SupabaseClientProvider(string url, string key, IAuthSessionStore? sessionStore = null)
+    public SupabaseClientProvider(string url, string key, IProtectedStringStore? sessionStore = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(url);
         ArgumentException.ThrowIfNullOrWhiteSpace(key);
