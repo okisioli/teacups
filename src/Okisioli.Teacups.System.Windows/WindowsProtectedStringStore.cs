@@ -5,6 +5,9 @@ using Okisioli.Teacups.System;
 
 namespace Okisioli.Teacups.System.Windows;
 
+/// <summary>
+/// Stores a single string value protected with Windows Data Protection API (DPAPI).
+/// </summary>
 public sealed class WindowsProtectedStringStore : IProtectedStringStore
 {
     private readonly byte[] entropy;
@@ -19,6 +22,7 @@ public sealed class WindowsProtectedStringStore : IProtectedStringStore
         this.entropy = Encoding.UTF8.GetBytes(entropy);
     }
 
+    /// <inheritdoc />
     public string? Load()
     {
         if (!File.Exists(filePath))
@@ -39,6 +43,7 @@ public sealed class WindowsProtectedStringStore : IProtectedStringStore
         }
     }
 
+    /// <inheritdoc />
     public void Save(string value)
     {
         var directory = Path.GetDirectoryName(filePath);
@@ -52,6 +57,7 @@ public sealed class WindowsProtectedStringStore : IProtectedStringStore
         File.WriteAllBytes(filePath, protectedData);
     }
 
+    /// <inheritdoc />
     public void Clear()
     {
         if (File.Exists(filePath))
