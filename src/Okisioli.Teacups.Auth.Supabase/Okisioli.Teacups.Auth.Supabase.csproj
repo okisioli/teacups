@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
+    <Version>0.3.0</Version>
+    <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
+    <PackageReleaseNotes>Renamed from Okisioli.Teacups.Auth.Provider.Supabase to Okisioli.Teacups.Auth.Supabase and now uses IProtectedStringStore.</PackageReleaseNotes>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Supabase" />
+    <ProjectReference Include="..\Okisioli.Teacups.Auth\Okisioli.Teacups.Auth.csproj" />
+    <ProjectReference Include="..\Okisioli.Teacups.System\Okisioli.Teacups.System.csproj" />
+  </ItemGroup>
+</Project>

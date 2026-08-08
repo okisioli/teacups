@@ -1,4 +1,4 @@
-namespace Okisioli.Teacups.Auth.Provider;
+namespace Okisioli.Teacups.Auth;
 
 public interface IAuthService
 {

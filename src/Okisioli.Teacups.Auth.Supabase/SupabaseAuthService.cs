@@ -1,6 +1,6 @@
-using Okisioli.Teacups.Auth.Provider;
+using Okisioli.Teacups.Auth;
 
-namespace Okisioli.Teacups.Auth.Provider.Supabase;
+namespace Okisioli.Teacups.Auth.Supabase;
 
 public sealed class SupabaseAuthService(
     SupabaseClientProvider clientProvider,

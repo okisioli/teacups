@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <PackageId>Okisioli.Teacups.System.Windows</PackageId>
+    <Version>0.3.0</Version>
+    <Description>Windows DPAPI-backed protected string storage for .NET applications.</Description>
+    <PackageReleaseNotes>Added ProtectedStringStore with caller-configured storage path and entropy.</PackageReleaseNotes>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" />
+    <ProjectReference Include="..\Okisioli.Teacups.System\Okisioli.Teacups.System.csproj" />
+  </ItemGroup>
+</Project>
