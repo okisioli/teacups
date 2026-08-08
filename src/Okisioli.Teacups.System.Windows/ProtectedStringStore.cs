@@ -1,6 +1,3 @@
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 using Okisioli.Teacups.System;
 
 namespace Okisioli.Teacups.System.Windows;
@@ -10,8 +7,7 @@ namespace Okisioli.Teacups.System.Windows;
 /// </summary>
 public sealed class ProtectedStringStore : IProtectedStringStore
 {
-    private readonly byte[] entropy;
-    private readonly string filePath;
+    private readonly ProtectedFileStore store;
 
     /// <summary>
     /// Initializes a protected string store.
@@ -26,54 +22,15 @@ public sealed class ProtectedStringStore : IProtectedStringStore
     /// </param>
     public ProtectedStringStore(string filePath, string entropy)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
-        ArgumentException.ThrowIfNullOrWhiteSpace(entropy);
-
-        this.filePath = filePath;
-        this.entropy = Encoding.UTF8.GetBytes(entropy);
+        store = new ProtectedFileStore(filePath, entropy);
     }
 
     /// <inheritdoc />
-    public string? Load()
-    {
-        if (!File.Exists(filePath))
-        {
-            return null;
-        }
-
-        try
-        {
-            var protectedData = File.ReadAllBytes(filePath);
-            var data = ProtectedData.Unprotect(protectedData, entropy, DataProtectionScope.CurrentUser);
-            return Encoding.UTF8.GetString(data);
-        }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or CryptographicException)
-        {
-            Clear();
-            return null;
-        }
-    }
+    public string? Load() => store.LoadValue(store.StoragePath);
 
     /// <inheritdoc />
-    public void Save(string value)
-    {
-        var directory = Path.GetDirectoryName(filePath);
-        if (!string.IsNullOrEmpty(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-
-        var data = Encoding.UTF8.GetBytes(value);
-        var protectedData = ProtectedData.Protect(data, entropy, DataProtectionScope.CurrentUser);
-        File.WriteAllBytes(filePath, protectedData);
-    }
+    public void Save(string value) => store.SaveValue(store.StoragePath, value);
 
     /// <inheritdoc />
-    public void Clear()
-    {
-        if (File.Exists(filePath))
-        {
-            File.Delete(filePath);
-        }
-    }
+    public void Clear() => store.DeleteValue(store.StoragePath);
 }

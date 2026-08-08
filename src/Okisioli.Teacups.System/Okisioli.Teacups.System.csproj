@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.System</PackageId>
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
     <Description>Reusable system and process helpers for .NET applications.</Description>
-    <PackageReleaseNotes>Added IProtectedStringStore for protected single-string persistence.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added protected string and key/value storage contracts.</PackageReleaseNotes>
   </PropertyGroup>
 </Project>
