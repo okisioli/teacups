@@ -13,6 +13,17 @@ public sealed class WindowsProtectedStringStore : IProtectedStringStore
     private readonly byte[] entropy;
     private readonly string filePath;
 
+    /// <summary>
+    /// Initializes a protected string store.
+    /// </summary>
+    /// <param name="filePath">
+    /// The file to store data in. A file name uses the current directory; prefer an application-specific path below
+    /// local application data. Parent directories are created automatically.
+    /// </param>
+    /// <param name="entropy">
+    /// A stable, application-specific, non-secret value used by DPAPI. For example,
+    /// <c>Contoso.MyApp.ProtectedStore.v1</c>. It can be hard-coded, but must not change for existing data.
+    /// </param>
     public WindowsProtectedStringStore(string filePath, string entropy)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
