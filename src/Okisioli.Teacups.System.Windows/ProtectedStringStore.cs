@@ -8,7 +8,7 @@ namespace Okisioli.Teacups.System.Windows;
 /// <summary>
 /// Stores a single string value protected with Windows Data Protection API (DPAPI).
 /// </summary>
-public sealed class WindowsProtectedStringStore : IProtectedStringStore
+public sealed class ProtectedStringStore : IProtectedStringStore
 {
     private readonly byte[] entropy;
     private readonly string filePath;
@@ -24,7 +24,7 @@ public sealed class WindowsProtectedStringStore : IProtectedStringStore
     /// A stable, application-specific, non-secret value used by DPAPI. For example,
     /// <c>Contoso.MyApp.ProtectedStore.v1</c>. It can be hard-coded, but must not change for existing data.
     /// </param>
-    public WindowsProtectedStringStore(string filePath, string entropy)
+    public ProtectedStringStore(string filePath, string entropy)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
         ArgumentException.ThrowIfNullOrWhiteSpace(entropy);

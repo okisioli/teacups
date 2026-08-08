@@ -4,7 +4,7 @@
     <PackageId>Okisioli.Teacups.System.Windows</PackageId>
     <Version>0.3.0</Version>
     <Description>Windows DPAPI-backed protected string storage for .NET applications.</Description>
-    <PackageReleaseNotes>Added WindowsProtectedStringStore with caller-configured storage path and entropy.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added ProtectedStringStore with caller-configured storage path and entropy.</PackageReleaseNotes>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
   <ItemGroup>
