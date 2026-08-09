@@ -120,6 +120,6 @@ public sealed class SupabaseAuthService(
             return "Enter a valid email address.";
         }
 
-        return isSignUp ? "Unable to sign up." : "Unable to log in.";
+        return message;
     }
 }

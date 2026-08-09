@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
-    <PackageReleaseNotes>Renamed from Okisioli.Teacups.Auth.Provider.Supabase to Okisioli.Teacups.Auth.Supabase and now uses IProtectedStringStore.</PackageReleaseNotes>
+    <PackageReleaseNotes>Stopped concealing low-lever error message for "unexpected" error type.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
