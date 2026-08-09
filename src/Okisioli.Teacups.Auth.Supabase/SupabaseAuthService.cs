@@ -26,12 +26,16 @@ public sealed class SupabaseAuthService(
         {
             var session = await clientProvider.Client.Auth.SignIn(email, password);
             return session?.User is null
-                ? AuthResult.Failure("Invalid email or password.")
+                ? AuthResult.Failure(
+                    AuthErrorCodes.InvalidEmailOrPassword,
+                    "Invalid email or password.")
                 : AuthResult.Success;
         }
         catch (Exception exception)
         {
-            return AuthResult.Failure(MapError(exception.Message, isSignUp: false));
+            return AuthResult.Failure(
+                MapError(exception.Message, isSignUp: false),
+                exception.Message);
         }
     }
 
@@ -48,17 +52,23 @@ public sealed class SupabaseAuthService(
             var signUpSession = await clientProvider.Client.Auth.SignUp(email, password);
             if (signUpSession?.User is null)
             {
-                return AuthResult.Failure("Sign-up did not create a session.");
+                return AuthResult.Failure(
+                    AuthErrorCodes.SignUpFailed,
+                    "Sign-up did not create a session.");
             }
 
             var authenticatedSession = await clientProvider.Client.Auth.SignIn(email, password);
             return authenticatedSession?.User is null
-                ? AuthResult.Failure("Sign-up did not create a session.")
+                ? AuthResult.Failure(
+                    AuthErrorCodes.SignUpFailed,
+                    "Sign-up did not create a session.")
                 : AuthResult.Success;
         }
         catch (Exception exception)
         {
-            return AuthResult.Failure(MapError(exception.Message, isSignUp: true));
+            return AuthResult.Failure(
+                MapError(exception.Message, isSignUp: true),
+                exception.Message);
         }
     }
 
@@ -83,9 +93,11 @@ public sealed class SupabaseAuthService(
 
             return AuthResult.Success;
         }
-        catch
+        catch (Exception exception)
         {
-            return AuthResult.Failure("Unable to send the password reset email.");
+            return AuthResult.Failure(
+                AuthErrorCodes.PasswordResetFailed,
+                exception.Message);
         }
     }
 
@@ -95,31 +107,31 @@ public sealed class SupabaseAuthService(
         await clientProvider.Client.Auth.SignOut();
     }
 
-    private static string MapError(string message, bool isSignUp)
+    private static int MapError(string message, bool isSignUp)
     {
         var normalized = message.ToLowerInvariant();
 
         if (isSignUp && (normalized.Contains("already registered") || normalized.Contains("already exists")))
         {
-            return "Email is already in use.";
+            return AuthErrorCodes.EmailAlreadyInUse;
         }
 
         if (normalized.Contains("password")
             && (normalized.Contains("short") || normalized.Contains("least") || normalized.Contains("weak")))
         {
-            return "Invalid password. Use at least 6 characters.";
+            return AuthErrorCodes.InvalidPassword;
         }
 
         if (normalized.Contains("invalid login") || normalized.Contains("invalid credentials"))
         {
-            return "Invalid email or password.";
+            return AuthErrorCodes.InvalidEmailOrPassword;
         }
 
         if (normalized.Contains("email") && normalized.Contains("invalid"))
         {
-            return "Enter a valid email address.";
+            return AuthErrorCodes.InvalidEmail;
         }
 
-        return message;
+        return AuthErrorCodes.Unexpected;
     }
 }
