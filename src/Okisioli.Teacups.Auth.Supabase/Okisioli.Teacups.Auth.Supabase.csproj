@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
-    <Version>0.4.0</Version>
+    <Version>0.4.1</Version>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
     <PackageReleaseNotes>Stopped concealing low-lever error message for "unexpected" error type.</PackageReleaseNotes>
   </PropertyGroup>
