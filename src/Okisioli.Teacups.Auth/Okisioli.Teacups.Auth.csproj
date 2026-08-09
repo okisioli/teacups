@@ -3,6 +3,6 @@
     <PackageId>Okisioli.Teacups.Auth</PackageId>
     <Version>0.5.0</Version>
     <Description>Provider-neutral authentication contracts for .NET applications.</Description>
-    <PackageReleaseNotes>Added shared integer authentication error codes, provider diagnostics, and original exceptions.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added shared integer authentication error codes, provider diagnostics, original exceptions, and factory-only AuthResult creation.</PackageReleaseNotes>
   </PropertyGroup>
 </Project>
