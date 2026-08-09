@@ -3,7 +3,7 @@
     <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
     <Version>0.5.0</Version>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
-    <PackageReleaseNotes>Mapped Supabase authentication failures to shared integer error codes and preserved raw error messages.</PackageReleaseNotes>
+    <PackageReleaseNotes>Mapped Supabase authentication failures to shared integer error codes and preserved provider error diagnostics.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
