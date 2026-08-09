@@ -1,4 +1,5 @@
 using Okisioli.Teacups.Auth;
+using Supabase.Gotrue.Exceptions;
 
 namespace Okisioli.Teacups.Auth.Supabase;
 
@@ -26,16 +27,19 @@ public sealed class SupabaseAuthService(
         {
             var session = await clientProvider.Client.Auth.SignIn(email, password);
             return session?.User is null
-                ? AuthResult.Failure(
-                    AuthErrorCodes.InvalidEmailOrPassword,
-                    "Invalid email or password.")
+                ? AuthResult.Failure(AuthErrorCodes.InvalidEmailOrPassword)
                 : AuthResult.Success;
+        }
+        catch (GotrueException exception)
+        {
+            return CreateFailure(exception);
         }
         catch (Exception exception)
         {
             return AuthResult.Failure(
-                MapError(exception.Message, isSignUp: false),
-                exception.Message);
+                AuthErrorCodes.Unexpected,
+                exception.Message,
+                exception);
         }
     }
 
@@ -52,23 +56,24 @@ public sealed class SupabaseAuthService(
             var signUpSession = await clientProvider.Client.Auth.SignUp(email, password);
             if (signUpSession?.User is null)
             {
-                return AuthResult.Failure(
-                    AuthErrorCodes.SignUpFailed,
-                    "Sign-up did not create a session.");
+                return AuthResult.Failure(AuthErrorCodes.SignUpFailed);
             }
 
             var authenticatedSession = await clientProvider.Client.Auth.SignIn(email, password);
             return authenticatedSession?.User is null
-                ? AuthResult.Failure(
-                    AuthErrorCodes.SignUpFailed,
-                    "Sign-up did not create a session.")
+                ? AuthResult.Failure(AuthErrorCodes.SignUpFailed)
                 : AuthResult.Success;
+        }
+        catch (GotrueException exception)
+        {
+            return CreateFailure(exception);
         }
         catch (Exception exception)
         {
             return AuthResult.Failure(
-                MapError(exception.Message, isSignUp: true),
-                exception.Message);
+                AuthErrorCodes.Unexpected,
+                exception.Message,
+                exception);
         }
     }
 
@@ -93,11 +98,16 @@ public sealed class SupabaseAuthService(
 
             return AuthResult.Success;
         }
+        catch (GotrueException exception)
+        {
+            return CreateFailure(exception);
+        }
         catch (Exception exception)
         {
             return AuthResult.Failure(
                 AuthErrorCodes.PasswordResetFailed,
-                exception.Message);
+                exception.Message,
+                exception);
         }
     }
 
@@ -107,31 +117,36 @@ public sealed class SupabaseAuthService(
         await clientProvider.Client.Auth.SignOut();
     }
 
-    private static int MapError(string message, bool isSignUp)
+    private static AuthResult CreateFailure(GotrueException exception)
     {
-        var normalized = message.ToLowerInvariant();
-
-        if (isSignUp && (normalized.Contains("already registered") || normalized.Contains("already exists")))
-        {
-            return AuthErrorCodes.EmailAlreadyInUse;
-        }
-
-        if (normalized.Contains("password")
-            && (normalized.Contains("short") || normalized.Contains("least") || normalized.Contains("weak")))
-        {
-            return AuthErrorCodes.InvalidPassword;
-        }
-
-        if (normalized.Contains("invalid login") || normalized.Contains("invalid credentials"))
-        {
-            return AuthErrorCodes.InvalidEmailOrPassword;
-        }
-
-        if (normalized.Contains("email") && normalized.Contains("invalid"))
-        {
-            return AuthErrorCodes.InvalidEmail;
-        }
-
-        return AuthErrorCodes.Unexpected;
+        var errorCode = MapError(exception.Reason);
+        return AuthResult.Failure(errorCode, exception.Message, exception);
     }
+
+    private static int MapError(FailureHint.Reason reason) => reason switch
+    {
+        FailureHint.Reason.UserAlreadyRegistered => AuthErrorCodes.EmailAlreadyInUse,
+        FailureHint.Reason.UserEmailNotConfirmed => AuthErrorCodes.EmailNotConfirmed,
+        FailureHint.Reason.ExpiredRefreshToken => AuthErrorCodes.ExpiredRefreshToken,
+        FailureHint.Reason.UserBadEmailAddress => AuthErrorCodes.InvalidEmail,
+        FailureHint.Reason.UserBadLogin => AuthErrorCodes.InvalidEmailOrPassword,
+        FailureHint.Reason.UserBadMultiple => AuthErrorCodes.InvalidEmailOrPassword,
+        FailureHint.Reason.UserBadPassword => AuthErrorCodes.InvalidPassword,
+        FailureHint.Reason.InvalidRefreshToken => AuthErrorCodes.InvalidRefreshToken,
+        FailureHint.Reason.UserMissingInformation => AuthErrorCodes.MissingInformation,
+        FailureHint.Reason.NoSessionFound => AuthErrorCodes.NoSession,
+        FailureHint.Reason.Offline => AuthErrorCodes.Offline,
+        FailureHint.Reason.UserTooManyRequests => AuthErrorCodes.TooManyRequests,
+        FailureHint.Reason.Unknown => AuthErrorCodes.Unexpected,
+
+        FailureHint.Reason.AdminTokenRequired => AuthErrorCodes.AdminTokenRequired,
+        FailureHint.Reason.BadSessionUrl => AuthErrorCodes.BadSessionUrl,
+        FailureHint.Reason.InvalidFlowType => AuthErrorCodes.InvalidFlowType,
+        FailureHint.Reason.UserBadPhoneNumber => AuthErrorCodes.InvalidPhone,
+        FailureHint.Reason.MfaChallengeUnverified => AuthErrorCodes.MfaChallengeUnverified,
+        FailureHint.Reason.SsoDomainNotFound => AuthErrorCodes.SsoDomainNotFound,
+        FailureHint.Reason.SsoProviderNotFound => AuthErrorCodes.SsoProviderNotFound,
+        _ => AuthErrorCodes.Unexpected
+    };
+
 }
