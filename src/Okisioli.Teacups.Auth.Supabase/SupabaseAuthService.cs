@@ -38,7 +38,8 @@ public sealed class SupabaseAuthService(
         {
             return AuthResult.Failure(
                 AuthErrorCodes.Unexpected,
-                exception.Message);
+                exception.Message,
+                exception);
         }
     }
 
@@ -71,7 +72,8 @@ public sealed class SupabaseAuthService(
         {
             return AuthResult.Failure(
                 AuthErrorCodes.Unexpected,
-                exception.Message);
+                exception.Message,
+                exception);
         }
     }
 
@@ -104,7 +106,8 @@ public sealed class SupabaseAuthService(
         {
             return AuthResult.Failure(
                 AuthErrorCodes.PasswordResetFailed,
-                exception.Message);
+                exception.Message,
+                exception);
         }
     }
 
@@ -117,7 +120,7 @@ public sealed class SupabaseAuthService(
     private static AuthResult CreateFailure(GotrueException exception)
     {
         var errorCode = MapError(exception.Reason);
-        return AuthResult.Failure(errorCode, exception.Message);
+        return AuthResult.Failure(errorCode, exception.Message, exception);
     }
 
     private static int MapError(FailureHint.Reason reason) => reason switch

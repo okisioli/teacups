@@ -3,12 +3,14 @@ namespace Okisioli.Teacups.Auth;
 public sealed record AuthResult(
     bool IsSuccess,
     int? ErrorCode = null,
-    string? ProviderErrorMessage = null)
+    string? ProviderErrorMessage = null,
+    Exception? ErrorException = null)
 {
     public static AuthResult Success { get; } = new(true);
 
     public static AuthResult Failure(
         int errorCode,
-        string? providerErrorMessage = null) =>
-        new(false, errorCode, providerErrorMessage);
+        string? providerErrorMessage = null,
+        Exception? errorException = null) =>
+        new(false, errorCode, providerErrorMessage, errorException);
 }
