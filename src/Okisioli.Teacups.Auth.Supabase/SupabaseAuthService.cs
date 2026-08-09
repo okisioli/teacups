@@ -1,4 +1,5 @@
 using Okisioli.Teacups.Auth;
+using Supabase.Gotrue.Exceptions;
 
 namespace Okisioli.Teacups.Auth.Supabase;
 
@@ -31,10 +32,15 @@ public sealed class SupabaseAuthService(
                     "Invalid email or password.")
                 : AuthResult.Success;
         }
+        catch (GotrueException exception)
+        {
+            return CreateFailure(exception);
+        }
         catch (Exception exception)
         {
             return AuthResult.Failure(
-                MapError(exception.Message, isSignUp: false),
+                AuthErrorCodes.Unexpected,
+                "An unexpected authentication error occurred.",
                 exception.Message);
         }
     }
@@ -64,10 +70,15 @@ public sealed class SupabaseAuthService(
                     "Sign-up did not create a session.")
                 : AuthResult.Success;
         }
+        catch (GotrueException exception)
+        {
+            return CreateFailure(exception);
+        }
         catch (Exception exception)
         {
             return AuthResult.Failure(
-                MapError(exception.Message, isSignUp: true),
+                AuthErrorCodes.Unexpected,
+                "An unexpected authentication error occurred.",
                 exception.Message);
         }
     }
@@ -93,10 +104,15 @@ public sealed class SupabaseAuthService(
 
             return AuthResult.Success;
         }
+        catch (GotrueException exception)
+        {
+            return CreateFailure(exception);
+        }
         catch (Exception exception)
         {
             return AuthResult.Failure(
                 AuthErrorCodes.PasswordResetFailed,
+                "Unable to send the password reset email.",
                 exception.Message);
         }
     }
@@ -107,31 +123,59 @@ public sealed class SupabaseAuthService(
         await clientProvider.Client.Auth.SignOut();
     }
 
-    private static int MapError(string message, bool isSignUp)
+    private static AuthResult CreateFailure(GotrueException exception)
     {
-        var normalized = message.ToLowerInvariant();
-
-        if (isSignUp && (normalized.Contains("already registered") || normalized.Contains("already exists")))
-        {
-            return AuthErrorCodes.EmailAlreadyInUse;
-        }
-
-        if (normalized.Contains("password")
-            && (normalized.Contains("short") || normalized.Contains("least") || normalized.Contains("weak")))
-        {
-            return AuthErrorCodes.InvalidPassword;
-        }
-
-        if (normalized.Contains("invalid login") || normalized.Contains("invalid credentials"))
-        {
-            return AuthErrorCodes.InvalidEmailOrPassword;
-        }
-
-        if (normalized.Contains("email") && normalized.Contains("invalid"))
-        {
-            return AuthErrorCodes.InvalidEmail;
-        }
-
-        return AuthErrorCodes.Unexpected;
+        var errorCode = MapError(exception.Reason);
+        return AuthResult.Failure(
+            errorCode,
+            GetErrorMessage(errorCode),
+            exception.Message);
     }
+
+    private static int MapError(FailureHint.Reason reason) => reason switch
+    {
+        FailureHint.Reason.Offline => AuthErrorCodes.Offline,
+        FailureHint.Reason.UserEmailNotConfirmed => AuthErrorCodes.EmailNotConfirmed,
+        FailureHint.Reason.UserBadMultiple => AuthErrorCodes.InvalidEmailOrPassword,
+        FailureHint.Reason.UserBadPassword => AuthErrorCodes.InvalidPassword,
+        FailureHint.Reason.UserBadLogin => AuthErrorCodes.InvalidEmailOrPassword,
+        FailureHint.Reason.UserBadEmailAddress => AuthErrorCodes.InvalidEmail,
+        FailureHint.Reason.UserBadPhoneNumber => AuthErrorCodes.InvalidPhone,
+        FailureHint.Reason.UserMissingInformation => AuthErrorCodes.MissingInformation,
+        FailureHint.Reason.UserAlreadyRegistered => AuthErrorCodes.EmailAlreadyInUse,
+        FailureHint.Reason.UserTooManyRequests => AuthErrorCodes.TooManyRequests,
+        FailureHint.Reason.InvalidRefreshToken => AuthErrorCodes.InvalidRefreshToken,
+        FailureHint.Reason.ExpiredRefreshToken => AuthErrorCodes.ExpiredRefreshToken,
+        FailureHint.Reason.AdminTokenRequired => AuthErrorCodes.AdminTokenRequired,
+        FailureHint.Reason.NoSessionFound => AuthErrorCodes.NoSession,
+        FailureHint.Reason.BadSessionUrl => AuthErrorCodes.BadSessionUrl,
+        FailureHint.Reason.InvalidFlowType => AuthErrorCodes.InvalidFlowType,
+        FailureHint.Reason.SsoDomainNotFound => AuthErrorCodes.SsoDomainNotFound,
+        FailureHint.Reason.SsoProviderNotFound => AuthErrorCodes.SsoProviderNotFound,
+        FailureHint.Reason.MfaChallengeUnverified => AuthErrorCodes.MfaChallengeUnverified,
+        _ => AuthErrorCodes.Unexpected
+    };
+
+    private static string GetErrorMessage(int errorCode) => errorCode switch
+    {
+        AuthErrorCodes.Offline => "The authentication service is offline.",
+        AuthErrorCodes.EmailNotConfirmed => "Confirm your email address before signing in.",
+        AuthErrorCodes.InvalidEmailOrPassword => "Invalid email or password.",
+        AuthErrorCodes.InvalidPassword => "Invalid password.",
+        AuthErrorCodes.InvalidEmail => "Enter a valid email address.",
+        AuthErrorCodes.InvalidPhone => "Enter a valid phone number.",
+        AuthErrorCodes.MissingInformation => "Provide all required information.",
+        AuthErrorCodes.EmailAlreadyInUse => "Email is already in use.",
+        AuthErrorCodes.TooManyRequests => "Too many authentication attempts. Try again later.",
+        AuthErrorCodes.InvalidRefreshToken => "The refresh token is invalid.",
+        AuthErrorCodes.ExpiredRefreshToken => "The refresh token has expired.",
+        AuthErrorCodes.AdminTokenRequired => "This operation requires an administrator token.",
+        AuthErrorCodes.NoSession => "No valid authentication session was found.",
+        AuthErrorCodes.BadSessionUrl => "The authentication session URL is invalid.",
+        AuthErrorCodes.InvalidFlowType => "The authentication flow is invalid.",
+        AuthErrorCodes.SsoDomainNotFound => "The SSO domain was not found.",
+        AuthErrorCodes.SsoProviderNotFound => "The SSO provider was not found.",
+        AuthErrorCodes.MfaChallengeUnverified => "The MFA challenge was not verified.",
+        _ => "An unexpected authentication error occurred."
+    };
 }
