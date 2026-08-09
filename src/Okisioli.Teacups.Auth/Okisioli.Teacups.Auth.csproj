@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth</PackageId>
-    <Version>0.4.1</Version>
+    <Version>0.5.1</Version>
     <Description>Provider-neutral authentication contracts for .NET applications.</Description>
-    <PackageReleaseNotes>Version sync with the (currently the only one) Supabase implementation.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added shared integer authentication error codes and preserved raw error messages.</PackageReleaseNotes>
   </PropertyGroup>
 </Project>
