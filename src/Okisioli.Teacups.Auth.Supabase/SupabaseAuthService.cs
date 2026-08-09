@@ -125,25 +125,27 @@ public sealed class SupabaseAuthService(
 
     private static int MapError(FailureHint.Reason reason) => reason switch
     {
-        FailureHint.Reason.Offline => AuthErrorCodes.Offline,
+        FailureHint.Reason.UserAlreadyRegistered => AuthErrorCodes.EmailAlreadyInUse,
         FailureHint.Reason.UserEmailNotConfirmed => AuthErrorCodes.EmailNotConfirmed,
+        FailureHint.Reason.ExpiredRefreshToken => AuthErrorCodes.ExpiredRefreshToken,
+        FailureHint.Reason.UserBadEmailAddress => AuthErrorCodes.InvalidEmail,
+        FailureHint.Reason.UserBadLogin => AuthErrorCodes.InvalidEmailOrPassword,
         FailureHint.Reason.UserBadMultiple => AuthErrorCodes.InvalidEmailOrPassword,
         FailureHint.Reason.UserBadPassword => AuthErrorCodes.InvalidPassword,
-        FailureHint.Reason.UserBadLogin => AuthErrorCodes.InvalidEmailOrPassword,
-        FailureHint.Reason.UserBadEmailAddress => AuthErrorCodes.InvalidEmail,
-        FailureHint.Reason.UserBadPhoneNumber => AuthErrorCodes.InvalidPhone,
-        FailureHint.Reason.UserMissingInformation => AuthErrorCodes.MissingInformation,
-        FailureHint.Reason.UserAlreadyRegistered => AuthErrorCodes.EmailAlreadyInUse,
-        FailureHint.Reason.UserTooManyRequests => AuthErrorCodes.TooManyRequests,
         FailureHint.Reason.InvalidRefreshToken => AuthErrorCodes.InvalidRefreshToken,
-        FailureHint.Reason.ExpiredRefreshToken => AuthErrorCodes.ExpiredRefreshToken,
-        FailureHint.Reason.AdminTokenRequired => AuthErrorCodes.AdminTokenRequired,
+        FailureHint.Reason.UserMissingInformation => AuthErrorCodes.MissingInformation,
         FailureHint.Reason.NoSessionFound => AuthErrorCodes.NoSession,
+        FailureHint.Reason.Offline => AuthErrorCodes.Offline,
+        FailureHint.Reason.UserTooManyRequests => AuthErrorCodes.TooManyRequests,
+        FailureHint.Reason.Unknown => AuthErrorCodes.Unexpected,
+
+        FailureHint.Reason.AdminTokenRequired => AuthErrorCodes.AdminTokenRequired,
         FailureHint.Reason.BadSessionUrl => AuthErrorCodes.BadSessionUrl,
         FailureHint.Reason.InvalidFlowType => AuthErrorCodes.InvalidFlowType,
+        FailureHint.Reason.UserBadPhoneNumber => AuthErrorCodes.InvalidPhone,
+        FailureHint.Reason.MfaChallengeUnverified => AuthErrorCodes.MfaChallengeUnverified,
         FailureHint.Reason.SsoDomainNotFound => AuthErrorCodes.SsoDomainNotFound,
         FailureHint.Reason.SsoProviderNotFound => AuthErrorCodes.SsoProviderNotFound,
-        FailureHint.Reason.MfaChallengeUnverified => AuthErrorCodes.MfaChallengeUnverified,
         _ => AuthErrorCodes.Unexpected
     };
 
