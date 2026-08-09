@@ -26,12 +26,16 @@ public sealed class SupabaseAuthService(
         {
             var session = await clientProvider.Client.Auth.SignIn(email, password);
             return session?.User is null
-                ? AuthResult.Failure(AuthErrorCodes.InvalidEmailOrPassword)
+                ? AuthResult.Failure(
+                    AuthErrorCodes.InvalidEmailOrPassword,
+                    "Invalid email or password.")
                 : AuthResult.Success;
         }
         catch (Exception exception)
         {
-            return AuthResult.Failure(MapError(exception.Message, isSignUp: false));
+            return AuthResult.Failure(
+                MapError(exception.Message, isSignUp: false),
+                exception.Message);
         }
     }
 
@@ -48,17 +52,23 @@ public sealed class SupabaseAuthService(
             var signUpSession = await clientProvider.Client.Auth.SignUp(email, password);
             if (signUpSession?.User is null)
             {
-                return AuthResult.Failure(AuthErrorCodes.SignUpFailed);
+                return AuthResult.Failure(
+                    AuthErrorCodes.SignUpFailed,
+                    "Sign-up did not create a session.");
             }
 
             var authenticatedSession = await clientProvider.Client.Auth.SignIn(email, password);
             return authenticatedSession?.User is null
-                ? AuthResult.Failure(AuthErrorCodes.SignUpFailed)
+                ? AuthResult.Failure(
+                    AuthErrorCodes.SignUpFailed,
+                    "Sign-up did not create a session.")
                 : AuthResult.Success;
         }
         catch (Exception exception)
         {
-            return AuthResult.Failure(MapError(exception.Message, isSignUp: true));
+            return AuthResult.Failure(
+                MapError(exception.Message, isSignUp: true),
+                exception.Message);
         }
     }
 
@@ -83,9 +93,11 @@ public sealed class SupabaseAuthService(
 
             return AuthResult.Success;
         }
-        catch
+        catch (Exception exception)
         {
-            return AuthResult.Failure(AuthErrorCodes.PasswordResetFailed);
+            return AuthResult.Failure(
+                AuthErrorCodes.PasswordResetFailed,
+                exception.Message);
         }
     }
 
