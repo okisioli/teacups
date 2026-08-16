@@ -8,7 +8,7 @@ namespace Okisioli.Teacups.Auth.Cookies;
 /// <summary>Implements <see cref="IAuthService"/> with ASP.NET Core cookie authentication.</summary>
 public sealed class CookieAuthService(
     IHttpContextAccessor httpContextAccessor,
-    ICredentialValidator credentialValidator) : IAuthService
+    IUserLoginAuthenticator userLoginAuthenticator) : IAuthService
 {
     /// <inheritdoc />
     public string? UserId => GetCurrentUserId();
@@ -30,7 +30,7 @@ public sealed class CookieAuthService(
 
         try
         {
-            var user = await credentialValidator.ValidateAsync(email, password);
+            var user = await userLoginAuthenticator.AuthenticateAsync(email, password);
             if (user is null)
             {
                 return AuthResult.Failure(AuthErrorCodes.InvalidEmailOrPassword, "Invalid email or password.");

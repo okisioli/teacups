@@ -7,16 +7,16 @@ namespace Okisioli.Teacups.Auth.Cookies;
 /// <summary>Registers and configures cookie authentication services.</summary>
 public static class ServiceCollectionExtensions
 {
-    /// <summary>Adds cookie-based <see cref="IAuthService"/> authentication backed by an application's credential validator.</summary>
-    public static IServiceCollection AddCookieAuth<TCredentialValidator>(
+    /// <summary>Adds cookie-based <see cref="IAuthService"/> authentication backed by an application's account authenticator.</summary>
+    public static IServiceCollection AddCookieAuth<TUserLoginAuthenticator>(
         this IServiceCollection services,
         Action<CookieAuthenticationOptions>? configure = null)
-        where TCredentialValidator : class, ICredentialValidator
+        where TUserLoginAuthenticator : class, IUserLoginAuthenticator
     {
         ArgumentNullException.ThrowIfNull(services);
 
         services.AddHttpContextAccessor();
-        services.AddScoped<ICredentialValidator, TCredentialValidator>();
+        services.AddScoped<IUserLoginAuthenticator, TUserLoginAuthenticator>();
         services.AddScoped<IAuthService, CookieAuthService>();
 
         var authentication = services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);

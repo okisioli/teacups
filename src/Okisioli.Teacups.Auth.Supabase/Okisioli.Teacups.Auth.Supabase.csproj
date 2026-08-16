@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
-    <Version>0.5.1</Version>
+    <Version>0.6.0</Version>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
-    <PackageReleaseNotes>Mapped Supabase authentication failures to shared codes and preserved provider diagnostics and original exceptions.</PackageReleaseNotes>
+    <PackageReleaseNotes>Aligned all authentication packages to version 0.6.0.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
