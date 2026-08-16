@@ -4,6 +4,7 @@
     <Project Path="src/Okisioli.Teacups.Media.Subs/Okisioli.Teacups.Media.Subs.csproj" />
     <Project Path="src/Okisioli.Teacups.Auth.Supabase/Okisioli.Teacups.Auth.Supabase.csproj" />
     <Project Path="src/Okisioli.Teacups.Auth/Okisioli.Teacups.Auth.csproj" />
+    <Project Path="src/Okisioli.Teacups.Auth.Cookies/Okisioli.Teacups.Auth.Cookies.csproj" />
     <Project Path="src/Okisioli.Teacups.System.Windows/Okisioli.Teacups.System.Windows.csproj" />
   </Folder>
 </Solution>
