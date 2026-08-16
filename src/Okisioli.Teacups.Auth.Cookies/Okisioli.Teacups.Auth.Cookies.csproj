@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Okisioli.Teacups.Auth.Cookies</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Cookie-based ASP.NET Core authentication implementation for Okisioli.Teacups.Auth.</Description>
+    <PackageReleaseNotes>Initial release with cookie session management and pluggable credential validation for ASP.NET Core applications.</PackageReleaseNotes>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\Okisioli.Teacups.Auth\Okisioli.Teacups.Auth.csproj" />
+  </ItemGroup>
+</Project>
