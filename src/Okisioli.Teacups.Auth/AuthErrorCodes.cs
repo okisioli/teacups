@@ -1,5 +1,6 @@
 namespace Okisioli.Teacups.Auth;
 
+/// <summary>Defines provider-neutral error codes for authentication operations.</summary>
 public static class AuthErrorCodes
 {
     /// <summary>An account that is already registered during account creation.</summary>

@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Okisioli.Teacups.Media.Subs;
 
+/// <summary>Provides timer-driven playback for SRT subtitle files.</summary>
 public sealed class SubtitleService : ISubtitleService
 {
     private static readonly TimeSpan UpdateInterval = TimeSpan.FromMilliseconds(33);
@@ -32,15 +33,19 @@ public sealed class SubtitleService : ISubtitleService
     private bool isLoaded;
     private bool isDisposed;
 
+    /// <summary>Initializes a subtitle service.</summary>
     public SubtitleService()
     {
         timer = new Timer(OnTimerTick);
     }
 
+    /// <inheritdoc />
     public string? CurrentText { get; private set; }
 
+    /// <inheritdoc />
     public bool IsPlaying { get; private set; }
 
+    /// <inheritdoc />
     public TimeSpan Position
     {
         get
@@ -50,10 +55,13 @@ public sealed class SubtitleService : ISubtitleService
         }
     }
 
+    /// <inheritdoc />
     public TimeSpan Duration { get; private set; }
 
+    /// <inheritdoc />
     public event EventHandler<SubtitleChangedEventArgs>? CurrentLineChanged;
 
+    /// <inheritdoc />
     public async Task LoadAsync(string filePath, CancellationToken cancellationToken = default)
     {
         ObjectDisposedException.ThrowIf(isDisposed, this);
@@ -78,6 +86,7 @@ public sealed class SubtitleService : ISubtitleService
         RaiseCurrentLineChanged(eventArgs);
     }
 
+    /// <inheritdoc />
     public void Play()
     {
         ObjectDisposedException.ThrowIf(isDisposed, this);
@@ -99,6 +108,7 @@ public sealed class SubtitleService : ISubtitleService
         }
     }
 
+    /// <inheritdoc />
     public void Pause()
     {
         ObjectDisposedException.ThrowIf(isDisposed, this);
@@ -114,6 +124,7 @@ public sealed class SubtitleService : ISubtitleService
         RaiseCurrentLineChanged(eventArgs);
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         lock (stateLock)

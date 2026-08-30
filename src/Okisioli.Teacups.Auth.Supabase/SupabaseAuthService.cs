@@ -3,18 +3,24 @@ using Supabase.Gotrue.Exceptions;
 
 namespace Okisioli.Teacups.Auth.Supabase;
 
+/// <summary>Implements <see cref="IAuthService"/> using Supabase authentication.</summary>
+/// <param name="clientProvider">Provides the configured Supabase client.</param>
+/// <param name="passwordResetRedirectUrl">Optional URL to which password-reset emails redirect.</param>
 public sealed class SupabaseAuthService(
     SupabaseClientProvider clientProvider,
     string? passwordResetRedirectUrl = null) : IAuthService
 {
+    /// <inheritdoc />
     public string? UserId => clientProvider.Client.Auth.CurrentUser?.Id;
 
+    /// <inheritdoc />
     public async Task<bool> IsLoggedInAsync()
     {
         await clientProvider.InitializeAsync();
         return clientProvider.Client.Auth.CurrentUser is not null;
     }
 
+    /// <inheritdoc />
     public async Task<AuthResult> LogInAsync(
         string email,
         string password,
@@ -43,6 +49,7 @@ public sealed class SupabaseAuthService(
         }
     }
 
+    /// <inheritdoc />
     public async Task<AuthResult> SignUpAsync(
         string email,
         string password,
@@ -77,6 +84,7 @@ public sealed class SupabaseAuthService(
         }
     }
 
+    /// <inheritdoc />
     public async Task<AuthResult> SendPasswordResetAsync(string email)
     {
         await clientProvider.InitializeAsync();
@@ -111,6 +119,7 @@ public sealed class SupabaseAuthService(
         }
     }
 
+    /// <inheritdoc />
     public async Task SignOutAsync()
     {
         clientProvider.SetSessionPersistence(enabled: false);

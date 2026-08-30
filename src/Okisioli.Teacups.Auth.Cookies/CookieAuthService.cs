@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 namespace Okisioli.Teacups.Auth.Cookies;
 
 /// <summary>Implements <see cref="IAuthService"/> with ASP.NET Core cookie authentication.</summary>
+/// <param name="httpContextAccessor">Provides the current HTTP context.</param>
+/// <param name="userLoginAuthenticator">Authenticates supplied user credentials.</param>
 public sealed class CookieAuthService(
     IHttpContextAccessor httpContextAccessor,
     IUserLoginAuthenticator userLoginAuthenticator) : IAuthService

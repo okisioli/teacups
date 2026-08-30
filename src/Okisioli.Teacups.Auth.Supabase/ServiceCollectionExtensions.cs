@@ -4,8 +4,15 @@ using Okisioli.Teacups.System;
 
 namespace Okisioli.Teacups.Auth.Supabase;
 
+/// <summary>Registers Supabase-backed authentication services.</summary>
 public static class ServiceCollectionExtensions
 {
+    /// <summary>Adds a Supabase implementation of <see cref="IAuthService"/>.</summary>
+    /// <param name="services">The service collection to configure.</param>
+    /// <param name="url">The Supabase project URL.</param>
+    /// <param name="key">The Supabase anonymous or publishable key.</param>
+    /// <param name="sessionStore">Optional protected storage for persisted sessions.</param>
+    /// <param name="passwordResetRedirectUrl">Optional URL to which password-reset emails redirect.</param>
     public static IServiceCollection AddSupabaseAuth(
         this IServiceCollection services,
         string url,
