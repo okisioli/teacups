@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Okisioli.Teacups.Store</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Provider-neutral contracts for securely storing sensitive application values.</Description>
+    <PackageReleaseNotes>Introduced secure key/value storage abstractions.</PackageReleaseNotes>
+  </PropertyGroup>
+</Project>
