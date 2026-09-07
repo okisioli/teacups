@@ -25,7 +25,7 @@ public sealed class WindowsSecureKeyValueStore : ISecureKeyValueStore
     public WindowsSecureKeyValueStore(string directoryPath, string entropy)
     {
         store = new ProtectedFileStore(directoryPath, entropy);
-        fileNamePrefix = $"secure-key-value-{store.StoreIdentifier}-";
+        fileNamePrefix = $"protected-key-value-{store.StoreIdentifier}-";
     }
 
     /// <inheritdoc />
