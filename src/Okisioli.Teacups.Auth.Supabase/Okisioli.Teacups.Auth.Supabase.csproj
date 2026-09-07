@@ -10,6 +10,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Supabase" />
     <ProjectReference Include="..\Okisioli.Teacups.Auth\Okisioli.Teacups.Auth.csproj" />
-    <ProjectReference Include="..\Okisioli.Teacups.System\Okisioli.Teacups.System.csproj" />
+    <ProjectReference Include="..\Okisioli.Teacups.Store\Okisioli.Teacups.Store.csproj" />
   </ItemGroup>
 </Project>

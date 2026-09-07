@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Okisioli.Teacups.Auth;
-using Okisioli.Teacups.System;
+using Okisioli.Teacups.Store;
 
 namespace Okisioli.Teacups.Auth.Supabase;
 
@@ -10,12 +10,13 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         string url,
         string key,
-        IProtectedStringStore? sessionStore = null,
-        string? passwordResetRedirectUrl = null)
+        ISecureKeyValueStore? sessionStore = null,
+        string? passwordResetRedirectUrl = null,
+        string sessionStorageKey = SupabaseClientProvider.DefaultSessionStorageKey)
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        var clientProvider = new SupabaseClientProvider(url, key, sessionStore);
+        var clientProvider = new SupabaseClientProvider(url, key, sessionStore, sessionStorageKey);
         services.AddSingleton(clientProvider);
         services.AddSingleton<IAuthService>(_ => new SupabaseAuthService(
             clientProvider,
