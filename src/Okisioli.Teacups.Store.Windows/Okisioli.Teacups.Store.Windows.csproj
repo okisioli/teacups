@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
     <PackageId>Okisioli.Teacups.Store.Windows</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.7.0</Version>
     <Description>Windows DPAPI-backed secure key/value storage for .NET applications.</Description>
-    <PackageReleaseNotes>Introduced a Windows DPAPI-backed secure key/value store.</PackageReleaseNotes>
+    <PackageReleaseNotes>Moved Windows DPAPI-backed secure key/value storage from Okisioli.Teacups.System.Windows and exposed WindowsSecureKeyValueStore.</PackageReleaseNotes>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
   <ItemGroup>
