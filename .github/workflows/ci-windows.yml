@@ -1,0 +1,24 @@
+name: CI Windows
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - run: dotnet workload install maui-windows --skip-manifest-update
+      - run: dotnet pack src/Okisioli.Teacups.Store/Okisioli.Teacups.Store.csproj -c Release -o validation-packages
+      - run: dotnet pack src/Okisioli.Teacups.Store.Maui/Okisioli.Teacups.Store.Maui.csproj -c Release -o validation-packages
+      - run: dotnet restore validation/Okisioli.Teacups.Store.Maui.PlatformValidation/Okisioli.Teacups.Store.Maui.PlatformValidation.csproj -p:TargetFramework=net9.0-windows10.0.19041.0 --configfile validation/Okisioli.Teacups.Store.Maui.PlatformValidation/NuGet.config
+      - run: dotnet build validation/Okisioli.Teacups.Store.Maui.PlatformValidation/Okisioli.Teacups.Store.Maui.PlatformValidation.csproj --no-restore -c Release -f net9.0-windows10.0.19041.0
