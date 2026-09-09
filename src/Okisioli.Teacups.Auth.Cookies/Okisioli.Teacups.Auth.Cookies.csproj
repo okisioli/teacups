@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth.Cookies</PackageId>
-    <Version>0.6.0</Version>
     <Description>Cookie-based ASP.NET Core authentication implementation for Okisioli.Teacups.Auth.</Description>
-    <PackageReleaseNotes>Renamed the application-supplied credential validator to IUserLoginAuthenticator and aligned all authentication packages to version 0.6.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Aligned the Teacups package family at version 0.8.0; this package has no API changes.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
