@@ -4,8 +4,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.17" />
+    <PackageVersion Include="Microsoft.Maui.Essentials" Version="9.0.110" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="Supabase" Version="1.1.1" />
-    <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="9.0.17" />
   </ItemGroup>
 </Project>

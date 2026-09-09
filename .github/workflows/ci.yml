@@ -12,8 +12,33 @@ permissions:
   contents: read
 
 jobs:
-  build-and-test:
+  discover-projects:
     runs-on: ubuntu-latest
+    outputs:
+      projects: ${{ steps.discover.outputs.projects }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: discover
+        name: Discover workload-free projects
+        shell: pwsh
+        run: |
+          [xml] $solution = Get-Content Okisioli.Teacups.slnx
+          $projects = @(
+            $solution.SelectNodes('//Project').Path |
+              Where-Object { $_ -notmatch '[/\\]Okisioli\.Teacups\.Store\.[^/\\]+[/\\]' } |
+              Sort-Object
+          )
+          "projects=$($projects | ConvertTo-Json -Compress -AsArray)" >> $env:GITHUB_OUTPUT
+
+  build-and-test:
+    needs: discover-projects
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover-projects.outputs.projects) }}
 
     steps:
       - uses: actions/checkout@v4
@@ -22,6 +47,6 @@ jobs:
         with:
           dotnet-version: "9.0.x"
 
-      - run: dotnet restore Okisioli.Teacups.slnx
-      - run: dotnet build Okisioli.Teacups.slnx --no-restore -c Release
-      - run: dotnet test Okisioli.Teacups.slnx --no-build -c Release
+      - run: dotnet restore "${{ matrix.project }}"
+      - run: dotnet build "${{ matrix.project }}" --no-restore -c Release
+      - run: dotnet test "${{ matrix.project }}" --no-build -c Release

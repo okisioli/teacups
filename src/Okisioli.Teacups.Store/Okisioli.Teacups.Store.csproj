@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Store</PackageId>
-    <Version>0.7.0</Version>
+    <Version>0.8.0</Version>
     <Description>Provider-neutral contracts for securely storing sensitive application values.</Description>
-    <PackageReleaseNotes>Introduced the provider-neutral ISecureKeyValueStore abstraction.</PackageReleaseNotes>
+    <PackageReleaseNotes>Changed ISecureKeyValueStore to expose asynchronous get, set, remove, and clear operations.</PackageReleaseNotes>
   </PropertyGroup>
 </Project>
