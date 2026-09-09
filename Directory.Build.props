@@ -3,7 +3,6 @@
     <ArtifactsPath>$(MSBuildThisFileDirectory)build</ArtifactsPath>
     <PackageOutputPath>$(MSBuildThisFileDirectory)publish</PackageOutputPath>
     <TargetFramework>net9.0</TargetFramework>
-    <Version>0.8.0</Version>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RepositoryUrl>https://github.com/oli-g-sk/teacups</RepositoryUrl>

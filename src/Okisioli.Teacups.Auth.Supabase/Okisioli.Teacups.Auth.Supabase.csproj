@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
+    <Version>0.8.0</Version>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
     <PackageReleaseNotes>Adapted Supabase session persistence to the asynchronous ISecureKeyValueStore contract while bridging Supabase's synchronous persistence hook.</PackageReleaseNotes>
   </PropertyGroup>
