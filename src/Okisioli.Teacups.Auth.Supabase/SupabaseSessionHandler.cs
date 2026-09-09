@@ -1,36 +1,38 @@
 using Newtonsoft.Json;
-using Okisioli.Teacups.System;
+using Okisioli.Teacups.Store;
 using Supabase.Gotrue;
 using Supabase.Gotrue.Interfaces;
 
 namespace Okisioli.Teacups.Auth.Supabase;
 
-internal sealed class SupabaseSessionHandler(IProtectedStringStore store) : IGotrueSessionPersistence<Session>
+internal sealed class SupabaseSessionHandler(
+    ISecureKeyValueStore store,
+    string storageKey) : IGotrueSessionPersistence<Session>
 {
-    private bool _persistenceEnabled = true;
+    private bool persistenceEnabled = true;
 
     public void SaveSession(Session session)
     {
-        if (_persistenceEnabled)
+        if (persistenceEnabled)
         {
-            store.Save(JsonConvert.SerializeObject(session));
+            store.Set(storageKey, JsonConvert.SerializeObject(session));
         }
         else
         {
-            store.Clear();
+            store.Remove(storageKey);
         }
     }
 
-    public void DestroySession() => store.Clear();
+    public void DestroySession() => store.Remove(storageKey);
 
     public Session? LoadSession()
     {
-        if (!_persistenceEnabled)
+        if (!persistenceEnabled)
         {
             return null;
         }
 
-        var serializedSession = store.Load();
+        var serializedSession = store.Get(storageKey);
         if (string.IsNullOrWhiteSpace(serializedSession))
         {
             return null;
@@ -42,17 +44,17 @@ internal sealed class SupabaseSessionHandler(IProtectedStringStore store) : IGot
         }
         catch (JsonException)
         {
-            store.Clear();
+            store.Remove(storageKey);
             return null;
         }
     }
 
     public void SetPersistence(bool enabled)
     {
-        _persistenceEnabled = enabled;
+        persistenceEnabled = enabled;
         if (!enabled)
         {
-            store.Clear();
+            store.Remove(storageKey);
         }
     }
 }

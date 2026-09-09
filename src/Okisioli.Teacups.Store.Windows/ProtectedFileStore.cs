@@ -1,14 +1,13 @@
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Okisioli.Teacups.System.Windows;
+namespace Okisioli.Teacups.Store.Windows;
 
-internal abstract class ProtectedStoreBase
+internal sealed class ProtectedFileStore
 {
     private readonly byte[] entropy;
 
-    protected ProtectedStoreBase(string storagePath, string entropy)
+    public ProtectedFileStore(string storagePath, string entropy)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(storagePath);
         ArgumentException.ThrowIfNullOrWhiteSpace(entropy);
@@ -57,19 +56,11 @@ internal abstract class ProtectedStoreBase
         File.WriteAllBytes(filePath, protectedData);
     }
 
-    internal void DeleteValue(string filePath)
+    internal static void DeleteValue(string filePath)
     {
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
         }
-    }
-}
-
-internal sealed class ProtectedFileStore : ProtectedStoreBase
-{
-    public ProtectedFileStore(string storagePath, string entropy)
-        : base(storagePath, entropy)
-    {
     }
 }

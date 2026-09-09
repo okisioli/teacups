@@ -1,9 +1,9 @@
-namespace Okisioli.Teacups.System;
+namespace Okisioli.Teacups.Store;
 
 /// <summary>
-/// Provides persistent protected storage for named string values.
+/// Provides persistent secure storage for named string values.
 /// </summary>
-public interface IProtectedKeyValueStore
+public interface ISecureKeyValueStore
 {
     /// <summary>
     /// Gets the value stored for the specified key, or <see langword="null"/> when no value is stored.
@@ -12,7 +12,7 @@ public interface IProtectedKeyValueStore
     string? Get(string key);
 
     /// <summary>
-    /// Protects and stores the specified value under the specified key.
+    /// Securely stores the specified value under the specified key.
     /// </summary>
     /// <param name="key">The key that identifies the value.</param>
     /// <param name="value">The value to store.</param>

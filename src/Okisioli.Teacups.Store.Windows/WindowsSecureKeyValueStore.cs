@@ -1,20 +1,18 @@
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Okisioli.Teacups.System;
 
-namespace Okisioli.Teacups.System.Windows;
+namespace Okisioli.Teacups.Store.Windows;
 
 /// <summary>
 /// Stores named string values in separate files protected with Windows Data Protection API (DPAPI).
 /// </summary>
-public sealed class ProtectedKeyValueStore : IProtectedKeyValueStore
+public sealed class WindowsSecureKeyValueStore : ISecureKeyValueStore
 {
     private readonly ProtectedFileStore store;
     private readonly string fileNamePrefix;
 
     /// <summary>
-    /// Initializes a protected key/value store.
+    /// Initializes a Windows secure key/value store.
     /// </summary>
     /// <param name="directoryPath">
     /// The directory in which to store protected values. Prefer a dedicated application-specific directory below local
@@ -22,9 +20,9 @@ public sealed class ProtectedKeyValueStore : IProtectedKeyValueStore
     /// </param>
     /// <param name="entropy">
     /// A stable, application-specific, non-secret value used by DPAPI. For example,
-    /// <c>Contoso.MyApp.ProtectedStore.v1</c>. It can be hard-coded, but must not change for existing data.
+    /// <c>Contoso.MyApp.SecureStore.v1</c>. It can be hard-coded, but must not change for existing data.
     /// </param>
-    public ProtectedKeyValueStore(string directoryPath, string entropy)
+    public WindowsSecureKeyValueStore(string directoryPath, string entropy)
     {
         store = new ProtectedFileStore(directoryPath, entropy);
         fileNamePrefix = $"protected-key-value-{store.StoreIdentifier}-";
@@ -37,7 +35,7 @@ public sealed class ProtectedKeyValueStore : IProtectedKeyValueStore
     public void Set(string key, string value) => store.SaveValue(GetFilePath(key), value);
 
     /// <inheritdoc />
-    public void Remove(string key) => store.DeleteValue(GetFilePath(key));
+    public void Remove(string key) => ProtectedFileStore.DeleteValue(GetFilePath(key));
 
     /// <inheritdoc />
     public void Clear()
@@ -47,7 +45,10 @@ public sealed class ProtectedKeyValueStore : IProtectedKeyValueStore
             return;
         }
 
-        foreach (var filePath in Directory.EnumerateFiles(store.StoragePath, $"{fileNamePrefix}*.dat", SearchOption.TopDirectoryOnly))
+        foreach (var filePath in Directory.EnumerateFiles(
+                     store.StoragePath,
+                     $"{fileNamePrefix}*.dat",
+                     SearchOption.TopDirectoryOnly))
         {
             File.Delete(filePath);
         }

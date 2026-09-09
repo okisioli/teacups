@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
-    <Version>0.6.0</Version>
+    <Version>0.7.0</Version>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
-    <PackageReleaseNotes>Aligned all authentication packages to version 0.6.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Replaced the System protected-string dependency with ISecureKeyValueStore, added a configurable session storage key, and limited session cleanup to the owned entry.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Supabase" />
     <ProjectReference Include="..\Okisioli.Teacups.Auth\Okisioli.Teacups.Auth.csproj" />
-    <ProjectReference Include="..\Okisioli.Teacups.System\Okisioli.Teacups.System.csproj" />
+    <ProjectReference Include="..\Okisioli.Teacups.Store\Okisioli.Teacups.Store.csproj" />
   </ItemGroup>
 </Project>
