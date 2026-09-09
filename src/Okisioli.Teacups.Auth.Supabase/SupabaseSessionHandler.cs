@@ -15,15 +15,15 @@ internal sealed class SupabaseSessionHandler(
     {
         if (persistenceEnabled)
         {
-            store.Set(storageKey, JsonConvert.SerializeObject(session));
+            store.SetAsync(storageKey, JsonConvert.SerializeObject(session)).GetAwaiter().GetResult();
         }
         else
         {
-            store.Remove(storageKey);
+            store.RemoveAsync(storageKey).GetAwaiter().GetResult();
         }
     }
 
-    public void DestroySession() => store.Remove(storageKey);
+    public void DestroySession() => store.RemoveAsync(storageKey).GetAwaiter().GetResult();
 
     public Session? LoadSession()
     {
@@ -32,7 +32,7 @@ internal sealed class SupabaseSessionHandler(
             return null;
         }
 
-        var serializedSession = store.Get(storageKey);
+        var serializedSession = store.GetAsync(storageKey).GetAwaiter().GetResult();
         if (string.IsNullOrWhiteSpace(serializedSession))
         {
             return null;
@@ -44,7 +44,7 @@ internal sealed class SupabaseSessionHandler(
         }
         catch (JsonException)
         {
-            store.Remove(storageKey);
+            store.RemoveAsync(storageKey).GetAwaiter().GetResult();
             return null;
         }
     }
@@ -54,7 +54,7 @@ internal sealed class SupabaseSessionHandler(
         persistenceEnabled = enabled;
         if (!enabled)
         {
-            store.Remove(storageKey);
+            store.RemoveAsync(storageKey).GetAwaiter().GetResult();
         }
     }
 }
