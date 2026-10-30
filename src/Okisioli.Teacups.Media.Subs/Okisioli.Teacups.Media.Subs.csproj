@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Media.Subs</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.10.0</Version>
     <Description>Framework-independent subtitle loading and playback for .NET applications.</Description>
     <PackageReleaseNotes />
   </PropertyGroup>

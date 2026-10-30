@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
     <PackageId>Okisioli.Teacups.System.Windows</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.10.0</Version>
     <Description>Reusable native Windows window helpers independent of UI frameworks.</Description>
     <PackageReleaseNotes>Introduced WindowHelper.HideFromTaskSwitcher for hiding native windows from Alt-Tab and the taskbar.</PackageReleaseNotes>
   </PropertyGroup>

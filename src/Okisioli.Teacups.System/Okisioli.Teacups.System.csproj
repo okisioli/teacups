@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.System</PackageId>
-    <Version>0.7.0</Version>
+    <Version>0.10.0</Version>
     <Description>Reusable system and process helpers for .NET applications.</Description>
     <PackageReleaseNotes>Removed protected storage contracts; secure storage now belongs to Okisioli.Teacups.Store.</PackageReleaseNotes>
   </PropertyGroup>

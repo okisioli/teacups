@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth</PackageId>
-    <Version>0.6.0</Version>
+    <Version>0.10.0</Version>
     <Description>Provider-neutral authentication contracts for .NET applications.</Description>
     <PackageReleaseNotes>Aligned all authentication packages to version 0.6.0.</PackageReleaseNotes>
   </PropertyGroup>
