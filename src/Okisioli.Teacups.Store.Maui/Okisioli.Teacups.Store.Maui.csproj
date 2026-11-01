@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Store.Maui</PackageId>
-    <Version>0.10.0</Version>
+    <Version>0.11.0</Version>
     <Description>.NET MAUI Essentials-backed secure key/value storage for Okisioli.Teacups.Store.</Description>
-    <PackageReleaseNotes>Introduced MAUI Essentials-backed secure storage for Android, iOS, Mac Catalyst, and Windows.</PackageReleaseNotes>
+    <PackageReleaseNotes>Aligned Teacups packages at version 0.11.0 and standardized on .NET 10.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Essentials" />
