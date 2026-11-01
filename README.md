@@ -4,7 +4,7 @@ A collection of tiny, self-contained .NET libraries built around the don't-repea
 
 ## Windows window helpers
 
-`Okisioli.Teacups.System.Windows` targets `net9.0-windows` and provides
+`Okisioli.Teacups.System.Windows` targets `net10.0-windows` and provides
 `WindowHelper.HideFromTaskSwitcher(nint windowHandle)`. It hides a native window
 from both Alt-Tab and the taskbar while preserving its other extended styles.
 It has no WPF or Avalonia dependency.
