@@ -9,6 +9,9 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Check out repository
@@ -23,11 +26,16 @@ jobs:
         run: dotnet restore Okisioli.Teacups.slnx
 
       - name: Build
-        run: dotnet build Okisioli.Teacups.slnx --configuration Release --no-restore
+        run: dotnet build Okisioli.Teacups.slnx --configuration Release --no-restore -m:1
 
       - name: Pack
         run: dotnet pack Okisioli.Teacups.slnx --configuration Release --no-build -o publish
 
+      - name: Authenticate to NuGet
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: oli.G
       - name: Publish to NuGet.org
         shell: bash
         run: |
@@ -40,6 +48,6 @@ jobs:
           for package in "${packages[@]}"; do
             dotnet nuget push "$package" \
               --source "https://api.nuget.org/v3/index.json" \
-              --api-key "${{ secrets.NUGET_API_KEY }}" \
+              --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
               --skip-duplicate
           done
