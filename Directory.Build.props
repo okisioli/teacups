@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ArtifactsPath>$(MSBuildThisFileDirectory)build</ArtifactsPath>
     <PackageOutputPath>$(MSBuildThisFileDirectory)publish</PackageOutputPath>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RepositoryUrl>https://github.com/oli-g-sk/teacups</RepositoryUrl>
