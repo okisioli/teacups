@@ -137,7 +137,8 @@ public sealed partial class SupabaseAuthService(
         }
         finally
         {
-            ((global::Supabase.Gotrue.Client)clientProvider.Client.Auth).DestroySession();
+            // Persistence is disabled, so loading the empty store also clears local state if revocation fails.
+            clientProvider.Client.Auth.LoadSession();
         }
     }
 
