@@ -18,5 +18,5 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "10.0.x"
-      - run: dotnet restore src/Okisioli.Teacups.Store.Maui/Okisioli.Teacups.Store.Maui.csproj -p:TargetFrameworks=net10.0-windows10.0.19041.0 -p:RestoreLockedMode=true
-      - run: dotnet build src/Okisioli.Teacups.Store.Maui/Okisioli.Teacups.Store.Maui.csproj --no-restore -c Release -m:1 -p:TargetFrameworks=net10.0-windows10.0.19041.0
+      - run: dotnet restore src/Okisioli.Teacups.Store.Maui/Okisioli.Teacups.Store.Maui.csproj -p:TeacupsStoreTargetFramework=net10.0-windows10.0.19041.0 -p:RestoreLockedMode=true
+      - run: dotnet build src/Okisioli.Teacups.Store.Maui/Okisioli.Teacups.Store.Maui.csproj --no-restore -c Release -m:1 -p:TeacupsStoreTargetFramework=net10.0-windows10.0.19041.0

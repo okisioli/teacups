@@ -22,6 +22,11 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - uses: actions/setup-java@v4
+        with:
+          distribution: microsoft
+          java-version: '21'
+
       - name: Install native library workloads
         run: dotnet workload install android ios maccatalyst --skip-manifest-update
 
