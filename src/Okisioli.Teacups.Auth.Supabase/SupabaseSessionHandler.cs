@@ -11,19 +11,20 @@ internal sealed class SupabaseSessionHandler(
 {
     private bool persistenceEnabled = true;
 
+    // GoTrue requires synchronous hooks. Keep async stores outside the host UI synchronization context.
     public void SaveSession(Session session)
     {
         if (persistenceEnabled)
         {
-            store.SetAsync(storageKey, JsonConvert.SerializeObject(session)).GetAwaiter().GetResult();
+            Task.Run(() => store.SetAsync(storageKey, JsonConvert.SerializeObject(session))).GetAwaiter().GetResult();
         }
         else
         {
-            store.RemoveAsync(storageKey).GetAwaiter().GetResult();
+            Task.Run(() => store.RemoveAsync(storageKey)).GetAwaiter().GetResult();
         }
     }
 
-    public void DestroySession() => store.RemoveAsync(storageKey).GetAwaiter().GetResult();
+    public void DestroySession() => Task.Run(() => store.RemoveAsync(storageKey)).GetAwaiter().GetResult();
 
     public Session? LoadSession()
     {
@@ -32,7 +33,7 @@ internal sealed class SupabaseSessionHandler(
             return null;
         }
 
-        var serializedSession = store.GetAsync(storageKey).GetAwaiter().GetResult();
+        var serializedSession = Task.Run(() => store.GetAsync(storageKey)).GetAwaiter().GetResult();
         if (string.IsNullOrWhiteSpace(serializedSession))
         {
             return null;
@@ -44,7 +45,7 @@ internal sealed class SupabaseSessionHandler(
         }
         catch (JsonException)
         {
-            store.RemoveAsync(storageKey).GetAwaiter().GetResult();
+            Task.Run(() => store.RemoveAsync(storageKey)).GetAwaiter().GetResult();
             return null;
         }
     }
@@ -54,7 +55,7 @@ internal sealed class SupabaseSessionHandler(
         persistenceEnabled = enabled;
         if (!enabled)
         {
-            store.RemoveAsync(storageKey).GetAwaiter().GetResult();
+            Task.Run(() => store.RemoveAsync(storageKey)).GetAwaiter().GetResult();
         }
     }
 }

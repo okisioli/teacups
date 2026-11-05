@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth.Cookies</PackageId>
-    <Version>0.11.0</Version>
+    <Version>0.12.0</Version>
     <Description>Cookie-based ASP.NET Core authentication implementation for Okisioli.Teacups.Auth.</Description>
-    <PackageReleaseNotes>Aligned Teacups packages at version 0.11.0 and standardized on .NET 10.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added optional display names to authenticated users and cookie claims.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

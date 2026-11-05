@@ -47,6 +47,6 @@ jobs:
         with:
           dotnet-version: "10.0.x"
 
-      - run: dotnet restore "${{ matrix.project }}"
-      - run: dotnet build "${{ matrix.project }}" --no-restore -c Release
-      - run: dotnet test "${{ matrix.project }}" --no-build -c Release
+      - run: dotnet restore "${{ matrix.project }}" -p:RestoreLockedMode=true
+      - run: dotnet build "${{ matrix.project }}" --no-restore -c Release -m:1
+      - run: dotnet test "${{ matrix.project }}" --no-build -c Release -m:1

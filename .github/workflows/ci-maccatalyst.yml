@@ -1,6 +1,10 @@
-name: CI Mac Catalyst
+name: CI maccatalyst
 
 on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -9,16 +13,11 @@ permissions:
 jobs:
   build:
     runs-on: macos-15
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "10.0.x"
-
       - run: dotnet workload install maccatalyst --skip-manifest-update
-      - run: dotnet pack src/Okisioli.Teacups.Store/Okisioli.Teacups.Store.csproj -c Release -o validation-packages
-      - run: dotnet pack src/Okisioli.Teacups.Store.Maui/Okisioli.Teacups.Store.Maui.csproj -c Release -o validation-packages
-      - run: dotnet restore validation/Okisioli.Teacups.Store.Maui.PlatformValidation/Okisioli.Teacups.Store.Maui.PlatformValidation.csproj -p:TargetFramework=net10.0-maccatalyst --configfile validation/Okisioli.Teacups.Store.Maui.PlatformValidation/NuGet.config
-      - run: dotnet build validation/Okisioli.Teacups.Store.Maui.PlatformValidation/Okisioli.Teacups.Store.Maui.PlatformValidation.csproj --no-restore -c Release -f net10.0-maccatalyst
+      - run: dotnet restore src/Okisioli.Teacups.Store.Maui/Okisioli.Teacups.Store.Maui.csproj -p:TargetFrameworks=net10.0-maccatalyst -p:RestoreLockedMode=true
+      - run: dotnet build src/Okisioli.Teacups.Store.Maui/Okisioli.Teacups.Store.Maui.csproj --no-restore -c Release -m:1 -p:TargetFrameworks=net10.0-maccatalyst

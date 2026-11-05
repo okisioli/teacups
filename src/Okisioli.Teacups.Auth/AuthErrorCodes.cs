@@ -47,4 +47,10 @@ public static class AuthErrorCodes
     public const int SsoDomainNotFound = 19;
     /// <summary>An SSO configuration referencing an unavailable provider.</summary>
     public const int SsoProviderNotFound = 20;
+    /// <summary>A provider declined sign-in or did not return an authenticated session.</summary>
+    public const int ExternalSignInFailed = 22;
+    /// <summary>A callback did not match its original sign-in transaction.</summary>
+    public const int InvalidAuthCallback = 23;
+    /// <summary>A sign-in transaction was not completed before its deadline.</summary>
+    public const int AuthRequestExpired = 24;
 }
