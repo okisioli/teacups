@@ -14,6 +14,11 @@ public sealed class CookieAuthService(
     public string? UserId => GetCurrentUserId();
 
     /// <inheritdoc />
+    public string? DisplayName => httpContextAccessor.HttpContext?.User.Identity?.IsAuthenticated is true
+        ? httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name)
+        : null;
+
+    /// <inheritdoc />
     public Task<bool> IsLoggedInAsync()
     {
         return Task.FromResult(httpContextAccessor.HttpContext?.User.Identity?.IsAuthenticated is true);
@@ -42,6 +47,9 @@ public sealed class CookieAuthService(
                 new Claim(ClaimTypes.Email, user.Email)
             ],
             CookieAuthenticationDefaults.AuthenticationScheme);
+
+            if (!string.IsNullOrWhiteSpace(user.DisplayName))
+                identity.AddClaim(new Claim(ClaimTypes.Name, user.DisplayName));
 
             await httpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,

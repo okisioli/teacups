@@ -2,13 +2,15 @@ using Okisioli.Teacups.Store;
 
 namespace Okisioli.Teacups.Auth.Supabase;
 
-public sealed class SupabaseClientProvider
+public sealed class SupabaseClientProvider : IDisposable
 {
     /// <summary>The default key used to persist a Supabase session.</summary>
     public const string DefaultSessionStorageKey = "Okisioli.Teacups.Auth.Supabase.Session";
 
     private readonly SupabaseSessionHandler? sessionHandler;
+    private readonly object initializationGate = new();
     private Task? initialization;
+    private bool disposed;
 
     public SupabaseClientProvider(
         string url,
@@ -35,7 +37,25 @@ public sealed class SupabaseClientProvider
 
     public global::Supabase.Client Client { get; }
 
-    public Task InitializeAsync() => initialization ??= InitializeClientAsync();
+    public Task InitializeAsync()
+    {
+        lock (initializationGate)
+        {
+            ObjectDisposedException.ThrowIf(disposed, this);
+            return initialization ??= InitializeClientAsync();
+        }
+    }
+
+    /// <summary>Stops the refresh timer when a host scope ends without signing the user out.</summary>
+    public void Dispose()
+    {
+        lock (initializationGate)
+        {
+            if (disposed) return;
+            disposed = true;
+            Client.Auth.Shutdown();
+        }
+    }
 
     internal void SetSessionPersistence(bool enabled) => sessionHandler?.SetPersistence(enabled);
 

@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth.Supabase</PackageId>
-    <Version>0.11.0</Version>
+    <Version>0.12.0</Version>
     <Description>Supabase authentication implementation for Okisioli.Teacups.Auth.</Description>
-    <PackageReleaseNotes>Aligned Teacups packages at version 0.11.0 and standardized on .NET 10.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added Google PKCE sign-in with correlated callbacks, display names, scoped session isolation, and refresh cleanup.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />

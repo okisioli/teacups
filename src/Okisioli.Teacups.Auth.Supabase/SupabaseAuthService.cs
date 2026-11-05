@@ -3,11 +3,27 @@ using Supabase.Gotrue.Exceptions;
 
 namespace Okisioli.Teacups.Auth.Supabase;
 
-public sealed class SupabaseAuthService(
+public sealed partial class SupabaseAuthService(
     SupabaseClientProvider clientProvider,
-    string? passwordResetRedirectUrl = null) : IAuthService
+    string? passwordResetRedirectUrl = null) : IExternalAuthService
 {
     public string? UserId => clientProvider.Client.Auth.CurrentUser?.Id;
+
+    /// <inheritdoc />
+    public string? DisplayName
+    {
+        get
+        {
+            var metadata = clientProvider.Client.Auth.CurrentUser?.UserMetadata;
+            if (metadata is null) return null;
+            foreach (var key in new[] { "given_name", "full_name", "name" })
+            {
+                if (metadata.TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value?.ToString()))
+                    return value.ToString();
+            }
+            return null;
+        }
+    }
 
     public async Task<bool> IsLoggedInAsync()
     {
@@ -113,8 +129,17 @@ public sealed class SupabaseAuthService(
 
     public async Task SignOutAsync()
     {
+        await clientProvider.InitializeAsync().ConfigureAwait(false);
         clientProvider.SetSessionPersistence(enabled: false);
-        await clientProvider.Client.Auth.SignOut();
+        try
+        {
+            await clientProvider.Client.Auth.SignOut().ConfigureAwait(false);
+        }
+        finally
+        {
+            // Persistence is disabled, so loading the empty store also clears local state if revocation fails.
+            clientProvider.Client.Auth.LoadSession();
+        }
     }
 
     private static AuthResult CreateFailure(GotrueException exception)

@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Store</PackageId>
-    <Version>0.11.0</Version>
+    <Version>0.12.0</Version>
     <Description>Provider-neutral contracts for securely storing sensitive application values.</Description>
-    <PackageReleaseNotes>Aligned Teacups packages at version 0.11.0 and standardized on .NET 10.</PackageReleaseNotes>
+    <PackageReleaseNotes>Released the secure storage contract alongside the native .NET 10 storage implementations.</PackageReleaseNotes>
   </PropertyGroup>
 </Project>

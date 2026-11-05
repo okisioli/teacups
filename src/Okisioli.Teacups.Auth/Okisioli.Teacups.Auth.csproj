@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Okisioli.Teacups.Auth</PackageId>
-    <Version>0.11.0</Version>
+    <Version>0.12.0</Version>
     <Description>Provider-neutral authentication contracts for .NET applications.</Description>
-    <PackageReleaseNotes>Aligned Teacups packages at version 0.11.0 and standardized on .NET 10.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added provider-neutral Google sign-in transactions and display names for authenticated users.</PackageReleaseNotes>
   </PropertyGroup>
 </Project>

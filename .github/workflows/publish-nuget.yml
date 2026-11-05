@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     permissions:
       contents: read
       id-token: write
@@ -20,16 +20,24 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.0.x
+          global-json-file: global.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: microsoft
+          java-version: '21'
+
+      - name: Install native library workloads
+        run: dotnet workload install android ios maccatalyst --skip-manifest-update
 
       - name: Restore
-        run: dotnet restore Okisioli.Teacups.slnx
+        run: dotnet restore Okisioli.Teacups.slnx -p:RestoreLockedMode=true
 
       - name: Build
         run: dotnet build Okisioli.Teacups.slnx --configuration Release --no-restore -m:1
 
       - name: Pack
-        run: dotnet pack Okisioli.Teacups.slnx --configuration Release --no-build -o publish
+        run: dotnet pack Okisioli.Teacups.slnx --configuration Release --no-build -m:1 -o publish
 
       - name: Authenticate to NuGet
         uses: NuGet/login@v1
