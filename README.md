@@ -1,25 +1,16 @@
 # Okisioli.Teacups
 
-A collection of tiny, self-contained .NET libraries built around the don't-repeat-yourself principle.
+A collection of small, reusable .NET libraries for authentication, secure storage, subtitles, and system utilities.
 
-## Windows window helpers
+## Packages
 
-`Okisioli.Teacups.System.Windows` targets `net10.0-windows` and provides
-`WindowHelper.HideFromTaskSwitcher(nint windowHandle)`. It hides a native window
-from both Alt-Tab and the taskbar while preserving its other extended styles.
-It has no WPF or Avalonia dependency.
-
-Call it on the window's owning thread after its HWND is created, before showing
-it. For WPF, keep `ShowInTaskbar="False"` and call it from `OnSourceInitialized`:
-
-```csharp
-protected override void OnSourceInitialized(EventArgs e)
-{
-    base.OnSourceInitialized(e);
-    Okisioli.Teacups.System.Windows.WindowHelper.HideFromTaskSwitcher(
-        new System.Windows.Interop.WindowInteropHelper(this).Handle);
-}
-```
-
-The helper rejects a zero handle and throws `Win32Exception` if a native operation
-fails. Callers supply the native handle using their UI framework's own APIs.
+| Package | Purpose |
+| --- | --- |
+| `Okisioli.Teacups.Auth` | Provider-neutral authentication contracts. |
+| `Okisioli.Teacups.Auth.Cookies` | Cookie-based authentication for ASP.NET Core. |
+| `Okisioli.Teacups.Auth.Supabase` | Supabase authentication for .NET applications. |
+| `Okisioli.Teacups.Media.Subs` | Framework-independent subtitle loading and playback. |
+| `Okisioli.Teacups.Store` | Provider-neutral contracts for secure key-value storage. |
+| `Okisioli.Teacups.Store.Maui` | Secure key-value storage backed by .NET MAUI. |
+| `Okisioli.Teacups.System` | System and process utilities. |
+| `Okisioli.Teacups.System.Windows` | Native Windows window utilities for `net10.0-windows`. |
