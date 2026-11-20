@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
     <PackageId>Okisioli.Teacups.System.Windows</PackageId>
     <Version>0.11.0</Version>
     <Description>Reusable native Windows window helpers independent of UI frameworks.</Description>
