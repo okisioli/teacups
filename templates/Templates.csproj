@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Okisioli.Teacups.Templates</PackageId>
+    <Authors>Okisioli</Authors>
+    <Description>Tiny templates for .NET projects; part of the Teacups family of libraries and tools.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>1.6.0</Version>
+    <PackageReleaseNotes>
+      - Generate XML documentation by default in new Basic Library projects.
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <NoBuild>true</NoBuild>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)build\nupkg\</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="BasicLibrary\**\*" Exclude="BasicLibrary\**\bin\**;BasicLibrary\**\obj\**;BasicLibrary\**\build\**" />
+  </ItemGroup>
+</Project>

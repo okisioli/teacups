@@ -1,0 +1,37 @@
+name: Publish Templates
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Pack template package
+        run: dotnet pack templates/Templates.csproj -c Release -m:1
+
+      - name: Authenticate to NuGet
+        uses: NuGet/login@v1
+        with:
+          user: oli.G
+        id: login
+
+      - name: Publish to NuGet.org
+        run: |
+          dotnet nuget push templates/build/nupkg/*.nupkg \
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
