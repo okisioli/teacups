@@ -18,8 +18,20 @@ A collection of small, reusable .NET libraries for authentication, secure storag
 
 ## Templates
 
-Install the template package with `dotnet new install Okisioli.Teacups.Templates`, then run
-`dotnet new teacups-lib -n MyLibrary` to create a library.
+Install the template package with
+```
+dotnet new install Okisioli.Teacups.Templates
+```
 
-Pack the templates locally with `dotnet pack templates/Templates.csproj -m:1`. The
-**Publish Templates** workflow publishes the template package independently.
+Inir a new project with
+```
+dotnet new teacups-lib -n MyLibrary
+```
+
+to create a minimal starter solution for a modern .NET 10 library, with convenient defaults such as:
+
+- Central package management and a `Directory.Build.props` file
+- New `.slnx` solution file format
+- Clean folder structure predefined
+- Separation of source files and build artifacts
+- GitHub workflows to publish to NuGet.org and GitHub Packages
