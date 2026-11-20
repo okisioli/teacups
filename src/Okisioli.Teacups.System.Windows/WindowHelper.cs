@@ -20,19 +20,8 @@ public static class WindowHelper
     /// Call on the window's owning thread after its handle is created and before it is first shown.
     /// The helper works independently of WPF and Avalonia and preserves unrelated extended styles,
     /// including transparency and topmost behavior.
+    /// In WPF, set <c>ShowInTaskbar="False"</c> and call this method from <c>OnSourceInitialized</c>.
     /// </remarks>
-    /// <example>
-    /// In WPF, set <c>ShowInTaskbar="False"</c> on the window and call this method
-    /// from <c>OnSourceInitialized</c>.
-    /// <code>
-    /// protected override void OnSourceInitialized(EventArgs e)
-    /// {
-    ///     base.OnSourceInitialized(e);
-    ///     Okisioli.Teacups.System.Windows.WindowHelper.HideFromTaskSwitcher(
-    ///         new System.Windows.Interop.WindowInteropHelper(this).Handle);
-    /// }
-    /// </code>
-    /// </example>
     /// <exception cref="ArgumentException">The window handle is zero.</exception>
     /// <exception cref="Win32Exception">A native window operation fails.</exception>
     public static void HideFromTaskSwitcher(nint windowHandle)
