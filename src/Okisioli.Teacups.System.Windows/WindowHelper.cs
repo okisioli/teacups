@@ -13,12 +13,26 @@ public static class WindowHelper
     /// <summary>
     /// Hides a native Windows window from Alt-Tab and the taskbar.
     /// </summary>
-    /// <param name="windowHandle">The HWND of a window owned by the calling application.</param>
+    /// <param name="windowHandle">
+    /// The HWND of a window owned by the calling application. Obtain it through your UI framework.
+    /// </param>
     /// <remarks>
     /// Call on the window's owning thread after its handle is created and before it is first shown.
-    /// For WPF, call from OnSourceInitialized and keep ShowInTaskbar set to false.
-    /// Existing styles, including transparency and topmost behavior, are preserved.
+    /// The helper works independently of WPF and Avalonia and preserves unrelated extended styles,
+    /// including transparency and topmost behavior.
     /// </remarks>
+    /// <example>
+    /// In WPF, set <c>ShowInTaskbar="False"</c> on the window and call this method
+    /// from <c>OnSourceInitialized</c>.
+    /// <code>
+    /// protected override void OnSourceInitialized(EventArgs e)
+    /// {
+    ///     base.OnSourceInitialized(e);
+    ///     Okisioli.Teacups.System.Windows.WindowHelper.HideFromTaskSwitcher(
+    ///         new System.Windows.Interop.WindowInteropHelper(this).Handle);
+    /// }
+    /// </code>
+    /// </example>
     /// <exception cref="ArgumentException">The window handle is zero.</exception>
     /// <exception cref="Win32Exception">A native window operation fails.</exception>
     public static void HideFromTaskSwitcher(nint windowHandle)
