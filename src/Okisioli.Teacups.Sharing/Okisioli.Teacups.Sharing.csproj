@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Okisioli.Teacups.Sharing</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Generate short, URL-safe public IDs.</Description>
+    <PackageReleaseNotes>Introduced short public ID generation.</PackageReleaseNotes>
+  </PropertyGroup>
+</Project>

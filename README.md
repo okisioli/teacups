@@ -1,6 +1,6 @@
 # Okisioli.Teacups
 
-A collection of small, reusable .NET libraries for authentication, secure storage, subtitles, and system utilities.
+A collection of small, reusable .NET libraries for authentication, secure storage, subtitles, sharing, and system utilities.
 
 ## Packages
 
@@ -10,6 +10,7 @@ A collection of small, reusable .NET libraries for authentication, secure storag
 | `Okisioli.Teacups.Auth.Cookies` | Cookie-based authentication for ASP.NET Core. |
 | `Okisioli.Teacups.Auth.Supabase` | Supabase authentication for .NET applications. |
 | `Okisioli.Teacups.Media.Subs` | Framework-independent subtitle loading and playback. |
+| `Okisioli.Teacups.Sharing` | Generation of short, URL-safe public IDs. |
 | `Okisioli.Teacups.Store` | Provider-neutral contracts for secure key-value storage. |
 | `Okisioli.Teacups.Store.Maui` | Secure key-value storage backed by .NET MAUI. |
 | `Okisioli.Teacups.System` | System and process utilities. |
