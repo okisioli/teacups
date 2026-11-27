@@ -1,6 +1,10 @@
-# Okisioli.Teacups
+# Teacups
 
-A collection of small, reusable .NET libraries for authentication, secure storage, subtitles, sharing, and system utilities.
+A collection of small **.NET libraries for various functionality I kept re-writing over the years**.
+
+Even though an agent could roll any of these in seconds, I don't want to keep prompting for the same things (DRY 2.0), and prefer to grow and maintain my own, version-controlled, evolving set of narrow-focused helpers and tools.
+
+A sibling repository, focused on helpers and controls for UI frameworks, can be found at [Teacups UI](https://github.com/okisioli/teacups-ui).
 
 ## Packages
 
