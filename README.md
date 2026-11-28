@@ -10,16 +10,16 @@ A sibling repository, focused on helpers and controls for UI frameworks, can be 
 
 | Package | Purpose |
 | --- | --- |
-| `Okisioli.Teacups.Auth` | Provider-neutral authentication contracts. |
-| `Okisioli.Teacups.Auth.Cookies` | Cookie-based authentication for ASP.NET Core. |
-| `Okisioli.Teacups.Auth.Supabase` | Supabase authentication for .NET applications. |
-| `Okisioli.Teacups.Media.Subs` | Framework-independent subtitle loading and playback. |
-| `Okisioli.Teacups.Sharing` | Generation of short public IDs and readable random codes. |
-| `Okisioli.Teacups.Store` | Provider-neutral contracts for secure key-value storage. |
-| `Okisioli.Teacups.Store.Maui` | Secure key-value storage backed by .NET MAUI. |
-| `Okisioli.Teacups.System` | System and process utilities. |
-| `Okisioli.Teacups.System.Windows` | Native Windows window utilities for `net10.0-windows`. |
-| `Okisioli.Teacups.Templates` | .NET project templates, including Basic Library. |
+| [Okisioli.Teacups.Auth](src/Okisioli.Teacups.Auth) | Provider-neutral authentication contracts. |
+| [Okisioli.Teacups.Auth.Cookies](src/Okisioli.Teacups.Auth.Cookies) | Cookie-based authentication for ASP.NET Core. |
+| [Okisioli.Teacups.Auth.Supabase](src/Okisioli.Teacups.Auth.Supabase) | Supabase authentication for .NET applications. |
+| [Okisioli.Teacups.Media.Subs](src/Okisioli.Teacups.Media.Subs) | Framework-independent subtitle loading and playback. |
+| [Okisioli.Teacups.Sharing](src/Okisioli.Teacups.Sharing) | Generation of short public IDs and readable random codes. |
+| [Okisioli.Teacups.Store](src/Okisioli.Teacups.Store) | Provider-neutral contracts for secure key-value storage. |
+| [Okisioli.Teacups.Store.Maui](src/Okisioli.Teacups.Store.Maui) | Secure key-value storage backed by .NET MAUI. |
+| [Okisioli.Teacups.System](src/Okisioli.Teacups.System) | System and process utilities. |
+| [Okisioli.Teacups.System.Windows](src/Okisioli.Teacups.System.Windows) | Native Windows window utilities for `net10.0-windows`. |
+| [Okisioli.Teacups.Templates](templates) | .NET project templates, including Basic Library. |
 
 ## Templates
 
